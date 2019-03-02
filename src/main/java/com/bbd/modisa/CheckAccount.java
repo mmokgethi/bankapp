@@ -1,17 +1,17 @@
 package com.bbd.modisa;
 
 public class CheckAccount extends Account {
-    public CheckAccount(Integer nextId, Double currBal, String accType)
+    private static Double checkTransFee = 3.5;
+
+
+    public CheckAccount(int id, String accType)
     {
-        super(nextId, currBal, accType);
+        super(id, accType);
     }
 
-    /*public double withdraw(int amount)
+    //New balance after transaction fee
+    public double balance()
     {
-        if (getBalance() < amount)
-        {
-            System.out.println("Insufficient Funds");
-        }
-        return super.withdrawal(amount);
-    }*/
+        return checkTransFee;
+    }
 }

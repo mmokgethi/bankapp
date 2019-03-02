@@ -1,41 +1,97 @@
 package com.bbd.modisa;
 
+//import com.sun.java.util.jar.pack.Instruction;
+
 import java.util.Scanner;
+import java.lang.String;
 
 public class BankApp {
     public static void main(String[] args) {
+        //AccountType acctTypeS = AccountType.valueOf("Savings");
+        //AccountType acctTypeC = AccountType.valueOf("Cheque");
         Scanner scanner = new Scanner(System.in);
-
-        //Ask a user to Create Accout
-
-        //System.out.print("What Account would you like to Create?(Check/Savings)");
-
-
-
-
-
         Double amount = 0D;
+        String typeC;
+        char accType;
 
-        Account newAcc = new Account(1, 500, "Check ");
-        AccountType acctTypeC = AccountType.Cheque;
+        AccountType acctType;
 
-        System.out.println(newAcc.getAccountType() + "Account Created Successfully" + newAcc + "\n");
+        //accT.Cheque;
+        System.out.print("What type of account would you like to create? Cheque(C)/Savings(S): ");
+        accType = scanner.next().charAt(0);
+        if (accType == 'C')
+            acctType = AccountType.Cheque;
+        else
+            acctType = AccountType.Savings;
 
-        System.out.print("Which Action would you like to perform in your " + newAcc.getAccountType() +
-                " Account? Deposit(D)/Withdrawal(W)/Check Balance(C): ");
-        char opt = scanner.next().charAt(0);
-
-        if (opt == 'D')
+        switch (acctType)
         {
-            newAcc.deposit();
-        }
-        else if (opt == 'W')
-        {
-            newAcc.withdrawal();
-        }
-        else if (opt == 'C')
-        {
-            System.out.print("Your Current Balance is = R " + newAcc.getBalance());
+            case Cheque:
+
+                char cont;
+                double bal = 0d;
+
+                cont = 'Y';
+                Account newAccC = new Account(1, acctType.name());
+                CheckAccount cheque = new CheckAccount(1, acctType.name());
+                System.out.println(newAccC.getAccountType() + " Account Created Successfully" + newAccC + "\n");
+
+                while (cont == 'Y')
+                {
+
+
+                    System.out.print("Which Action would you like to perform in your " + newAccC.getAccountType() +
+                            " Account? Deposit(D)/Withdrawal(W)/Check Balance(C): ");
+                    char opt = scanner.next().charAt(0);
+
+                    if (opt == 'D')
+                    {
+                        cheque.deposit();
+
+                    }
+                    else if (opt == 'W')
+                    {
+                        cheque.withdrawal();
+
+                    }
+                    else if (opt == 'C')
+                    {
+                        System.out.println("Your Current Balance is = R " + (cheque.getBalance() - cheque.balance()));
+                    }
+                    System.out.print("\nWould you like to perform another transaction?(Y/N): ");
+                    cont = scanner.next().charAt(0);
+                }
+                break;
+            case Savings:
+                Account newAccS = new Account(1, acctType.name());
+                SavingsAccount saving = new SavingsAccount(1, acctType.name());
+                System.out.println(newAccS.getAccountType() + " Account Created Successfully" + newAccS + "\n");
+
+                cont = 'Y';
+
+                while (cont == 'Y')
+                {
+                    System.out.print("Which Action would you like to perform in your " + newAccS.getAccountType() +
+                            " Account? Deposit(D)/Withdrawal(W)/Check Balance(C): ");
+                    char optS = scanner.next().charAt(0);
+                    if (optS == 'D')
+                    {
+                        newAccS.deposit();
+                    }
+                    else if (optS == 'W')
+                    {
+                        newAccS.withdrawal();
+                    }
+                    else if (optS == 'C')
+                    {
+                        System.out.print("Your Current Balance is = R " + (newAccS.getBalance() - saving.balance()));
+                    }
+                    System.out.print("\nWould you like to perform another transaction?(Y/N): ");
+                    cont = scanner.next().charAt(0);
+                }
+                break;
+                default:
+                    System.out.print("Account Type doesn't exist");
         }
     }
 }

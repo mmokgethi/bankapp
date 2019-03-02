@@ -9,10 +9,10 @@ public class Account {
     private Double transFee;
     private String accountType;
 
-    Account(int nextId, double currBalance, String acctType)
+    Account(int nextId, String acctType)
     {
         id = nextId;
-        balance = currBalance;
+        balance = 0D;
         accountType = acctType;
     }
 
