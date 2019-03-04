@@ -37,6 +37,7 @@ public class BankApp {
 
                 char cont;
                 double bal = 0d;
+                double cash;
 
                 cont = 'Y';
                 Account newAccC = new Account(1, acctType.name());
@@ -53,18 +54,24 @@ public class BankApp {
 
                     if (opt == 'D')
                     {
-                        System.out.print("Your Current Balance = R " + cheque.dept());
+                        System.out.print("Enter the amout you would like to Deposit: R " );
+                        Scanner depAmount = new Scanner(System.in);
+                        cash = depAmount.nextDouble();
+                        System.out.print("Your Current Balance = R " + cheque.deposit(cash));
 
                     }
                     else if (opt == 'W')
                     {
-                        cheque.withdrawC();
-                        System.out.print("Withdraw Successfully\nYour Current Balance is R " + cheque.getMyBal());
+                        System.out.print("Enter the amount to Withdraw: R" );
+                        Scanner withAmt = new Scanner(System.in);
+                        cash = withAmt.nextDouble();
+                        //cheque.withdraw(cash);
+                        System.out.print("Withdraw Successfully\nYour Current Balance is R " + cheque.withdraw(cash));
 
                     }
                     else if (opt == 'C')
                     {
-                        System.out.print("Your Current Balance is = R " + cheque.getMyBal());
+                        System.out.print("Your Current Balance is = R " + cheque.getBalance());
                     }
                     System.out.print("\nWould you like to perform another transaction?(Y/N): ");
                     cont = scanner.next().charAt(0);
@@ -74,6 +81,7 @@ public class BankApp {
                 Account newAccS = new Account(1, acctType.name());
                 SavingsAccount saving = new SavingsAccount(1, acctType.name());
                 System.out.println(newAccS.getAccountType() + " Account Created Successfully" + newAccS + "\n");
+                double depositAmount;
 
                 cont = 'Y';
 
@@ -84,13 +92,23 @@ public class BankApp {
                     char optS = scanner.next().charAt(0);
                     if (optS == 'D')
                     {
-                        System.out.print("Your Current Balance = R " + saving.dept());
+                        Scanner depAmount = new Scanner(System.in);
+
+                        System.out.print("Enter the amout you would like to Deposit: R" );
+                        depositAmount = depAmount.nextDouble();
+
+                        System.out.print("Your Current Balance = R " + saving.deposit(depositAmount));
                         //newAccS.deposit();
                     }
                     else if (optS == 'W')
                     {
-                        saving.withdraw();
-                        System.out.print("Withdraw Successfully\nYour Current Balance is R " + saving.getMyBal());
+                        Scanner withAmt = new Scanner(System.in);
+
+                        System.out.print("Enter the amount to Withdraw: R" );
+                        depositAmount = withAmt.nextDouble();
+
+                        saving.withdraw(depositAmount);
+                        System.out.print("Withdraw Successfully\nYour Current Balance is R " + saving.getBalance());
                     }
                     else if (optS == 'C')
                     {

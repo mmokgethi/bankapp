@@ -2,9 +2,7 @@ package com.bbd.modisa.service;
 
 import com.bbd.modisa.model.Account;
 
-import java.util.Scanner;
-
-public class SavingsAccount extends Account {
+public class SavingsAccount extends Account implements Transaction {
     public SavingsAccount(Integer nextId, Double currBal, String accType)
     {
         super(nextId, currBal, accType);
@@ -18,41 +16,29 @@ public class SavingsAccount extends Account {
         super(id, accType);
     }
 
-    public double dept()
-    {
-        double deposited;
-        Scanner depAmount = new Scanner(System.in);
-
-        System.out.print("Enter the amout you would like to Deposit: R" );
-        deposited = depAmount.nextDouble();
-        myBal = ((getMyBal() + deposited) - saveTransFee);
+    public double getMyBal() {
         return myBal;
     }
 
-    public double withdraw()
-    {
+    public double deposit(double depositAmount) {
+        myBal = ((getMyBal() + depositAmount) - saveTransFee);
+        return myBal;
+    }
 
-        double withdraw;
-        //double wBal;
-        Scanner withAmt = new Scanner(System.in);
-
-        System.out.print("Enter the amount to Withdraw: R" );
-        withdraw = withAmt.nextDouble();
-
-
-        if (withdraw > getMyBal())
+    public double withdraw(double withdrawalAmount) {
+        if (withdrawalAmount > getMyBal())
         {
-            System.out.print("Insufficient funds");
+            return 0;
         }
         else
         {
-            myBal = (getMyBal() - withdraw) - saveTransFee;
+            myBal = (getMyBal() - withdrawalAmount) - saveTransFee;
 
         }
         return myBal;
     }
 
-    public double getMyBal() {
+    public double getBalance() {
         return myBal;
     }
 }
