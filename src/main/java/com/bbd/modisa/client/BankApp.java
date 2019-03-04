@@ -17,7 +17,7 @@ public class BankApp {
     private static char accType;
     private static AccountType acctType;
 
-    public static void createCheck()
+    private static void createCheck()
     {
         accountService = new ChequeAccountService();
         Account newAccC = accountService.createAccount(1);
@@ -50,7 +50,7 @@ public class BankApp {
         }
     }
 
-    public static void createSavings()
+    private static void createSavings()
     {
         accountService = new SavingsAccountService();
         Account saving = accountService.createAccount(1);
