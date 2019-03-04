@@ -5,20 +5,28 @@ public class Account {
     private Integer id;
     private Double balance;
     private Double transFee;
-    private String accountType;
+    private AccountType accountType;
 
-    public Account(int nextId, String acctType)
+    public AccountType getAccountType() {
+        return accountType;
+    }
+
+    public void setGetType(AccountType accountType) {
+        this.accountType = accountType;
+    }
+
+    public Account(int nextId, AccountType acctType)
     {
         id = nextId;
         balance = 0D;
-        accountType = acctType;
+        this.accountType = acctType;
     }
 
-    public Account(Integer nextId, Double currBalance, String type)
+    public Account(Integer nextId, Double currBalance, AccountType type)
     {
         id = nextId;
         balance = currBalance;
-        accountType = type;
+        this.accountType = type;
     }
 
     public Integer getId() {
@@ -40,14 +48,4 @@ public class Account {
     public void setTransFee(Double transFee) {
         this.transFee = transFee;
     }
-
-    public String getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
-    }
-
-
 }
