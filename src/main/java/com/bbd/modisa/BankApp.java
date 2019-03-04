@@ -21,8 +21,10 @@ public class BankApp {
         accType = scanner.next().charAt(0);
         if (accType == 'C')
             acctType = AccountType.Cheque;
-        else
+        else //if (accType == 'S')
             acctType = AccountType.Savings;
+      /*else
+          acctType = AccountType.values();*/
 
         switch (acctType)
         {
@@ -46,17 +48,18 @@ public class BankApp {
 
                     if (opt == 'D')
                     {
-                        cheque.deposit();
+                        System.out.print("Your Current Balance = R " + cheque.dept());
 
                     }
                     else if (opt == 'W')
                     {
-                        cheque.withdrawal();
+                        cheque.withdrawC();
+                        System.out.print("Withdraw Successfully\nYour Current Balance is R " + cheque.getMyBal());
 
                     }
                     else if (opt == 'C')
                     {
-                        System.out.println("Your Current Balance is = R " + (cheque.getBalance() - cheque.balance()));
+                        System.out.print("Your Current Balance is = R " + cheque.getMyBal());
                     }
                     System.out.print("\nWould you like to perform another transaction?(Y/N): ");
                     cont = scanner.next().charAt(0);
@@ -76,15 +79,17 @@ public class BankApp {
                     char optS = scanner.next().charAt(0);
                     if (optS == 'D')
                     {
-                        newAccS.deposit();
+                        System.out.print("Your Current Balance = R " + saving.dept());
+                        //newAccS.deposit();
                     }
                     else if (optS == 'W')
                     {
-                        newAccS.withdrawal();
+                        saving.withdraw();
+                        System.out.print("Withdraw Successfully\nYour Current Balance is R " + saving.getMyBal());
                     }
                     else if (optS == 'C')
                     {
-                        System.out.print("Your Current Balance is = R " + (newAccS.getBalance() - saving.balance()));
+                        System.out.print("Your Current Balance is = R " + saving.getMyBal());
                     }
                     System.out.print("\nWould you like to perform another transaction?(Y/N): ");
                     cont = scanner.next().charAt(0);

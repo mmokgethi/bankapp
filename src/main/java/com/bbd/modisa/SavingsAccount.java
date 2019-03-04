@@ -16,47 +16,42 @@ public class SavingsAccount extends Account {
         super(id, accType);
     }
 
-    //New balance after transaction fee
-    public double balance()
+    double dept()
     {
-        return saveTransFee;
+        double deposited;
+        Scanner depAmount = new Scanner(System.in);
+
+        System.out.print("Enter the amout you would like to Deposit: R" );
+        deposited = depAmount.nextDouble();
+        myBal = ((getMyBal() + deposited) - saveTransFee);
+        return myBal;
     }
 
-    void withdrawal(double withdraw)
+    double withdraw()
     {
+
+        double withdraw;
+        //double wBal;
         Scanner withAmt = new Scanner(System.in);
 
         System.out.print("Enter the amount to Withdraw: R" );
         withdraw = withAmt.nextDouble();
 
-        if (withdraw > myBal)
+
+        if (withdraw > getMyBal())
         {
             System.out.print("Insufficient funds");
         }
         else
         {
-            myBal -= withdraw;
-            System.out.print("R " + withdraw + " Withdrawn Successfully\nYour Current Balance is = : R" + (myBal - saveTransFee));
+            myBal = (getMyBal() - withdraw) - saveTransFee;
+
         }
-
-    }
-
-    //Allow user to deposit into the account
-    void deposit(double deposited)
-    {
-        Scanner depAmount = new Scanner(System.in);
-
-        System.out.print("Enter the amout you would like to Deposit: R" );
-        deposited = depAmount.nextDouble();
-        myBal += deposited;
-        System.out.print("Your Current Balance = R " + (myBal - saveTransFee));
-    }
-
-    public double getMyBal() {
-        myBal += myBal;
         return myBal;
     }
 
-
+    public double getMyBal() {
+        return myBal;
+    }
 }
 
