@@ -1,4 +1,4 @@
-package com.bbd.modisa;
+package com.bbd.modisa.model;
 
 
 public class Account {
@@ -7,7 +7,7 @@ public class Account {
     private Double transFee;
     private String accountType;
 
-    Account(int nextId, String acctType)
+    public Account(int nextId, String acctType)
     {
         id = nextId;
         balance = 0D;

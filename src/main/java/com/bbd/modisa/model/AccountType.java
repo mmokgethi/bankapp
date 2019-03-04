@@ -1,4 +1,4 @@
-package com.bbd.modisa;
+package com.bbd.modisa.model;
 import java.lang.String;
 
 public enum AccountType {

@@ -1,6 +1,11 @@
-package com.bbd.modisa;
+package com.bbd.modisa.client;
 
 //import com.sun.java.util.jar.pack.Instruction;
+
+import com.bbd.modisa.service.CheckAccount;
+import com.bbd.modisa.service.SavingsAccount;
+import com.bbd.modisa.model.Account;
+import com.bbd.modisa.model.AccountType;
 
 import java.util.Scanner;
 import java.lang.String;

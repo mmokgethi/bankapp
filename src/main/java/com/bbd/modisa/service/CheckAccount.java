@@ -1,4 +1,6 @@
-package com.bbd.modisa;
+package com.bbd.modisa.service;
+
+import com.bbd.modisa.model.Account;
 
 import java.util.Scanner;
 
@@ -12,7 +14,7 @@ public class CheckAccount extends Account {
         super(id, accType);
     }
 
-    double dept()
+    public double dept()
     {
         double deposited;
         Scanner depAmount = new Scanner(System.in);
@@ -23,7 +25,7 @@ public class CheckAccount extends Account {
         return myBal;
     }
 
-    double withdrawC()
+    public double withdrawC()
     {
 
         double withdraw;
