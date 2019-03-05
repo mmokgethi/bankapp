@@ -1,4 +1,4 @@
-package com.bbd.modisa;
+package com.bbd.modisa.model;
 
 public enum AccountType {
     Cheque,
