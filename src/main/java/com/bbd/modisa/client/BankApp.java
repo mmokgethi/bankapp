@@ -46,6 +46,9 @@ public class BankApp {
                         String.format("%.2f",accountServices.getBalance()));
             } else if (optS == 'C') {
                 System.out.print("Your Current Balance is = R " + String.format("%.2f",  accountServices.getBalance()));
+            } else if (optS == 'L')
+            {
+                accountServices.transactions();
             }
             System.out.print("\nWould you like to perform another accountService?(Y/N): ");
             cont = scanner.next().charAt(0);
