@@ -1,7 +1,6 @@
 package com.bbd.modisa.service;
 
 import com.bbd.modisa.model.Account;
-import com.bbd.modisa.model.AccountType;
 
 public interface AccountService {
 
