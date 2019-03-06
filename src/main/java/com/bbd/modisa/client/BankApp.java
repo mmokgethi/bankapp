@@ -1,5 +1,6 @@
 package com.bbd.modisa.client;
 
+import com.bbd.modisa.Data.TransactionLog;
 import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.model.Account;
 import com.bbd.modisa.model.AccountType;
@@ -20,13 +21,14 @@ public class BankApp {
 
         createAccountService(accType);
         AccountService accountServices = createAccountService(accType);
+        TransactionLog myLog = new TransactionLog();
 
         Account saving = accountServices.createAccount(1);
         System.out.println(saving.getAccountType() + " Account Created Successfully" + saving+ "\n");
 
         while (cont == 'Y') {
             System.out.print("Which Action would you like to perform in your " + saving.getAccountType() +
-                    " Account? Deposit(D)/Withdrawal(W)/Check Balance(C): ");
+                    " Account? Deposit(D)/Withdrawal(W)/Check Balance(C)/Transaction Log(L): ");
             char optS = scanner.next().charAt(0);
             if (optS == 'D') {
                 Scanner depAmount = new Scanner(System.in);
@@ -46,14 +48,14 @@ public class BankApp {
                         String.format("%.2f",accountServices.getBalance()));
             } else if (optS == 'C') {
                 System.out.print("Your Current Balance is = R " + String.format("%.2f",  accountServices.getBalance()));
-            } else if (optS == 'L')
-            {
-                accountServices.transactions();
+            } else if (optS == 'L') {
+                myLog.getTranLog();
             }
             System.out.print("\nWould you like to perform another accountService?(Y/N): ");
             cont = scanner.next().charAt(0);
         }
     }
+
 
     public static void main(String[] args) {
 

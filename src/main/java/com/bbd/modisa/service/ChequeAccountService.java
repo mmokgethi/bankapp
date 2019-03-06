@@ -13,6 +13,8 @@ public class ChequeAccountService implements AccountService {
     private double myBal;
     private List<String> trans = new ArrayList<String>();
 
+    public ChequeAccountService(){}
+
     public Account createAccount(int accountNo) {
         return new CheckAccount(accountNo);
     }

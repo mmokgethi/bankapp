@@ -7,4 +7,3 @@ public class SavingsAccount extends Account{
         super(nextId, AccountType.Savings);
     }
 }
-
