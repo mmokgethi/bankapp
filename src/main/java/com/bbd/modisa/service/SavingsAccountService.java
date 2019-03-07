@@ -29,7 +29,6 @@ public class SavingsAccountService implements AccountService {
         } else {
             myBal = (getBalance() - withdrawalAmount) - saveTransFee;
             trans.add("Withdrawn: R" + withdrawalAmount);
-
         }
         return myBal;
     }

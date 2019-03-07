@@ -26,11 +26,13 @@ public class TransactionLog{
 
     public void transactions()
     {
+        Collections.sort(trans);
         for (int i = 0; i < trans.size(); i++)
         {
             Double myLog = trans.get(i);
             System.out.println(myLog);
         }
-        Collections.sort(trans);
+        //trans.stream().map(s -> s.).forEach(System.out::print);111
+        //trans.stream().forEach(System.out::print);
     }
 }
