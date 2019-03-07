@@ -12,6 +12,4 @@ public interface AccountService {
 
     double getBalance();
 
-    void transactions();
-
 }

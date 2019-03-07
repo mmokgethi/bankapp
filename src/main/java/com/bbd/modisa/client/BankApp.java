@@ -1,6 +1,6 @@
 package com.bbd.modisa.client;
 
-import com.bbd.modisa.Data.TransactionLog;
+import com.bbd.modisa.data.TransactionLog;
 import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.model.Account;
 import com.bbd.modisa.model.AccountType;
@@ -11,20 +11,20 @@ import java.util.Scanner;
 
 public class BankApp {
     private static Scanner scanner = new Scanner(System.in);
-    private static AccountType acctType;
     private static char accType;
 
     private static void chequeSavings()
     {
         char cont = 'Y';
         Double amount;
+        TransactionLog tl = new TransactionLog();
 
         createAccountService(accType);
         AccountService accountServices = createAccountService(accType);
-        TransactionLog myLog = new TransactionLog();
 
         Account saving = accountServices.createAccount(1);
         System.out.println(saving.getAccountType() + " Account Created Successfully" + saving+ "\n");
+        tl.getAccount(saving.getAccountType());
 
         while (cont == 'Y') {
             System.out.print("Which Action would you like to perform in your " + saving.getAccountType() +
@@ -35,7 +35,7 @@ public class BankApp {
 
                 System.out.print("Enter the amount you would like to Deposit: R");
                 amount = depAmount.nextDouble();
-
+                tl.getDeposit(amount);
                 System.out.print("Your Current Balance = R " + String.format("%.2f",accountServices.deposit(amount)));
             } else if (optS == 'W') {
                 Scanner withAmt = new Scanner(System.in);
@@ -44,18 +44,23 @@ public class BankApp {
                 amount = withAmt.nextDouble();
 
                 accountServices.withdraw(amount);
+                tl.getWithdraw(amount);
                 System.out.print("Withdraw Successfully\nYour Current Balance is R " +
                         String.format("%.2f",accountServices.getBalance()));
             } else if (optS == 'C') {
                 System.out.print("Your Current Balance is = R " + String.format("%.2f",  accountServices.getBalance()));
             } else if (optS == 'L') {
-                myLog.getTranLog();
+                System.out.print("How would you like to sort your Log? From High(H)/From Low(L): ");
+                char opt = scanner.next().charAt(0);
+                if (opt == 'H')
+                    tl.transactions();
+                else
+                    tl.transactions();
             }
             System.out.print("\nWould you like to perform another accountService?(Y/N): ");
             cont = scanner.next().charAt(0);
         }
     }
-
 
     public static void main(String[] args) {
 
@@ -67,6 +72,8 @@ public class BankApp {
 
     private static AccountService createAccountService(char accType)
     {
+        AccountType acctType;
+
         if (accType == 'S')
             acctType = AccountType.Savings;
         else if (accType == 'C')
