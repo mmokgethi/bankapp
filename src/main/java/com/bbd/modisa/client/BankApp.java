@@ -55,7 +55,7 @@ public class BankApp {
                 if (opt == 'H')
                     tl.transactions();
                 else
-                    tl.transactions();
+                    tl.transactionsR();
             }
             System.out.print("\nWould you like to perform another accountService?(Y/N): ");
             cont = scanner.next().charAt(0);

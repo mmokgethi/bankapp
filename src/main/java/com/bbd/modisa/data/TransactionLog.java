@@ -16,7 +16,7 @@ public class TransactionLog{
 
     public void getAccount(AccountType acc)
     {
-        //trans.add(acc);
+
     }
 
     public void getWithdraw(double with)
@@ -32,7 +32,15 @@ public class TransactionLog{
             Double myLog = trans.get(i);
             System.out.println(myLog);
         }
-        //trans.stream().map(s -> s.).forEach(System.out::print);111
-        //trans.stream().forEach(System.out::print);
+    }
+
+    public void transactionsR()
+    {
+        Collections.sort(trans, Collections.reverseOrder());
+        for (int i = 0; i < trans.size(); i++)
+        {
+            Double myLog = trans.get(i);
+            System.out.println(myLog);
+        }
     }
 }
