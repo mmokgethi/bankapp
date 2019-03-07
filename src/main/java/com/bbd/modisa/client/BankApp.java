@@ -54,7 +54,7 @@ public class BankApp {
                 char opt = scanner.next().charAt(0);
                 if (opt == 'H')
                     tl.transactions();
-                else
+                else if (opt == 'L')
                     tl.transactionsR();
             }
             System.out.print("\nWould you like to perform another accountService?(Y/N): ");
