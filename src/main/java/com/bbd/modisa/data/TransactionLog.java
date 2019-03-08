@@ -1,7 +1,5 @@
 package com.bbd.modisa.data;
 
-import com.bbd.modisa.model.AccountType;
-
 import java.util.*;
 
 public class TransactionLog{
@@ -10,11 +8,6 @@ public class TransactionLog{
     public void getDeposit(double dep)
     {
         trans.add(dep);
-    }
-
-    public void getAccount(AccountType acc)
-    {
-
     }
 
     public void getWithdraw(double with)

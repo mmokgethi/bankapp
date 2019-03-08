@@ -24,7 +24,7 @@ public class BankApp {
 
         Account saving = accountServices.createAccount(1);
         System.out.println(saving.getAccountType() + " Account Created Successfully" + saving+ "\n");
-        tl.getAccount(saving.getAccountType());
+        //tl.getAccount(saving.getAccountType());
 
         while (cont == 'Y') {
             System.out.print("Which Action would you like to perform in your " + saving.getAccountType() +
