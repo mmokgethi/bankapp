@@ -10,12 +10,12 @@ public class TransactionLog{
 
     public void getDeposit(double dep)
     {
-        trans.add("Deposit \tR: " + dep);
+        trans.add("Deposit \tR: " + String.format("%.2f", dep));
     }
 
     public void getWithdraw(double with)
     {
-        trans.add("Withdrawal \tR: " + with);
+        trans.add("Withdrawal \tR: " + String.format("%.2f", with));
     }
 
     public void getAccount(AccountType accType)
