@@ -12,36 +12,28 @@ import java.util.Scanner;
 public class BankApp {
     private static Scanner scanner = new Scanner(System.in);
     private static char accType;
+    private static Double amount;
+    private static TransactionLog tl = new TransactionLog();
 
     private static void chequeSavings()
     {
         char cont = 'Y';
-        Double amount;
-        TransactionLog tl = new TransactionLog();
-
         createAccountService(accType);
         AccountService accountServices = createAccountService(accType);
 
         Account saving = accountServices.createAccount(1);
         System.out.println(saving.getAccountType() + " Account Created Successfully" + saving+ "\n");
-        //tl.getAccount(saving.getAccountType());
+        tl.getAccount(saving.getAccountType());
 
         while (cont == 'Y') {
             System.out.print("Which Action would you like to perform in your " + saving.getAccountType() +
                     " Account? Deposit(D)/Withdrawal(W)/Check Balance(C)/Transaction Log(L): ");
             char optS = scanner.next().charAt(0);
             if (optS == 'D') {
-                Scanner depAmount = new Scanner(System.in);
-
-                System.out.print("Enter the amount you would like to Deposit: R");
-                amount = depAmount.nextDouble();
-                tl.getDeposit(amount);
+                deposit();
                 System.out.print("Your Current Balance = R " + String.format("%.2f",accountServices.deposit(amount)));
             } else if (optS == 'W') {
-                Scanner withAmt = new Scanner(System.in);
-
-                System.out.print("Enter the amount to Withdraw: R");
-                amount = withAmt.nextDouble();
+                withdrawal();
 
                 accountServices.withdraw(amount);
                 tl.getWithdraw(amount);
@@ -49,17 +41,20 @@ public class BankApp {
                         String.format("%.2f",accountServices.getBalance()));
             } else if (optS == 'C') {
                 System.out.print("Your Current Balance is = R " + String.format("%.2f",  accountServices.getBalance()));
-            } else if (optS == 'L') {
-                System.out.print("How would you like to sort your Log? From High(H)/From Low(L): ");
-                char opt = scanner.next().charAt(0);
-                if (opt == 'H')
-                    tl.transactions();
-                else if (opt == 'L')
-                    tl.transactionsR();
-            }
+            } else if (optS == 'L')
+                log();
             System.out.print("\nWould you like to perform another accountService?(Y/N): ");
             cont = scanner.next().charAt(0);
         }
+    }
+
+    public static void deposit()
+    {
+        Scanner depAmount = new Scanner(System.in);
+
+        System.out.print("Enter the amount you would like to Deposit: R");
+        amount = depAmount.nextDouble();
+        tl.getDeposit(amount);
     }
 
     public static void main(String[] args) {
@@ -68,6 +63,32 @@ public class BankApp {
         accType = scanner.next().charAt(0);
 
         chequeSavings();
+    }
+
+    private static void withdrawal()
+    {
+        Scanner withAmt = new Scanner(System.in);
+
+        System.out.print("Enter the amount to Withdraw: R");
+        amount = withAmt.nextDouble();
+    }
+
+    private static void log()
+    {
+        System.out.print("How would you like to sort your Log? From High(H)/From Low(L): ");
+        char opt = scanner.next().charAt(0);
+        if (opt == 'H')
+        {
+            tl.accType();
+            System.out.println("___________________");
+            tl.transactions();
+        }
+        else if (opt == 'L')
+        {
+            tl.accType();
+            System.out.println("___________________");
+            tl.transactionsR();
+        }
     }
 
     private static AccountService createAccountService(char accType)

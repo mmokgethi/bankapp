@@ -9,8 +9,6 @@ public class ChequeAccountService implements AccountService {
     private static Double checkTransFee = 3.5;
     private double myBal;
 
-    public ChequeAccountService(){}
-
     public Account createAccount(int accountNo) {
         return new CheckAccount(accountNo);
     }
