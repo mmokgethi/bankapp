@@ -17,13 +17,13 @@ public class SavingsAccountService implements AccountService {
         return new SavingsAccount(accountNo);
     }
 
-    public double deposit(double depositAmount) {
+    public double deposit(double depositAmount, Account account) {
         myBal = ((getBalance() + depositAmount) - saveTransFee);
         trans.add("Deposited: + " + depositAmount);
         return myBal;
     }
 
-    public double withdraw(double withdrawalAmount) {
+    public double withdraw(double withdrawalAmount, Account account) {
         if (withdrawalAmount > getBalance()) {
             throw new InsufficientFundsException("Insufficient funds");
         } else {
@@ -31,15 +31,6 @@ public class SavingsAccountService implements AccountService {
             trans.add("Withdrawn: R" + withdrawalAmount);
         }
         return myBal;
-    }
-
-    public void transactions()
-    {
-        for (int i = 0; i < trans.size(); i++)
-        {
-            String myLog = trans.get(i);
-            System.out.println(myLog);
-        }
     }
 
     public double getBalance() {

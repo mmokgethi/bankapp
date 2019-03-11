@@ -31,7 +31,7 @@ public class BankApp {
             char optS = scanner.next().charAt(0);
             if (optS == 'D') {
                 deposit();
-                System.out.print("Your Current Balance = R " + String.format("%.2f",accountServices.deposit(amount)));
+                System.out.print("Your Current Balance = R " + String.format("%.2f",accountServices.deposit(amount, saving)));
             } else if (optS == 'W') {
                 withdrawal();
 

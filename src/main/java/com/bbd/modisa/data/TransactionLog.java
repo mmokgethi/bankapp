@@ -1,28 +1,31 @@
 package com.bbd.modisa.data;
 
 import com.bbd.modisa.model.AccountType;
-
 import java.util.*;
 
 public class TransactionLog{
     ArrayList<String> trans = new ArrayList<>();
     ArrayList<AccountType> account = new ArrayList<>();
 
+    //Add all deposit transactions into ArrayList
     public void getDeposit(double dep)
     {
         trans.add("Deposit \tR: " + String.format("%.2f", dep));
     }
 
-    public void getWithdraw(double with)
+    //Add all withdrawals transactions into ArrayList
+    public void getWithdraw(double withdraw)
     {
-        trans.add("Withdrawal \tR: " + String.format("%.2f", with));
+        trans.add("Withdrawal \tR: " + String.format("%.2f", withdraw));
     }
 
+    //Add transaction type to the ArrayList
     public void getAccount(AccountType accType)
     {
         account.add(accType);
     }
 
+    //Sort Transactions and remove duplicates
     public void transactions()
     {
         TreeSet<String> set = new TreeSet<>(trans);
@@ -34,6 +37,7 @@ public class TransactionLog{
         }
     }
 
+    //Sort all transactions
     public void transactionsR()
     {
         Collections.sort(trans);
@@ -44,6 +48,7 @@ public class TransactionLog{
         }
     }
 
+    //Get transaction type
     public void accType()
     {
         for (int i = 0; i < account.size(); i ++)

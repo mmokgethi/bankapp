@@ -6,9 +6,9 @@ public interface AccountService {
 
     Account createAccount(int accountNo);
 
-    double deposit(double depositAmount);
+    double deposit(double depositAmount, Account account);
 
-    double withdraw(double withdrawalAmount);
+    double withdraw(double withdrawalAmount, Account account);
 
     double getBalance();
 
