@@ -1,6 +1,9 @@
 package com.bbd.modisa.service;
 
 import com.bbd.modisa.model.Account;
+import com.bbd.modisa.model.Transaction;
+
+import java.util.List;
 
 public interface AccountService {
 
@@ -10,6 +13,7 @@ public interface AccountService {
 
     double withdraw(double withdrawalAmount, Account account);
 
+    List<Transaction> getAllTransactions(int accountNo);
     double getBalance();
 
 }

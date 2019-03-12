@@ -1,0 +1,66 @@
+package com.bbd.modisa.data;
+
+import com.bbd.modisa.exception.AccountNotFoundException;
+import com.bbd.modisa.exception.TransactionNotFoundException;
+import com.bbd.modisa.model.Account;
+import com.bbd.modisa.model.Transaction;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AccountDB {
+
+    private static final List<Account> ACCOUNT_LIST = new ArrayList<>();
+
+    public static void addAccount(Account account) {
+        ACCOUNT_LIST.add(account);
+    }
+
+    public static Account updateAccount(int accountId, Transaction transaction) {
+        for (Account account : ACCOUNT_LIST) {
+            if (account.getId() == accountId) {
+                account.getTransactions(1).add(transaction);
+                return account;
+            }
+        }
+        throw new AccountNotFoundException("Account not found in the database");
+    }
+
+    public static List<Transaction> getAllTransactions(int accountNo) {
+        for (int i = 0; i < ACCOUNT_LIST.size(); i++) {
+            Account log = ACCOUNT_LIST.get(i);
+            System.out.println(log);
+        }
+        return getAllTransactions(1);
+    }
+
+    public static Transaction getAccountTransaction(int accountId, int transactionId) {
+        Account currentAccount = null;
+        for (Account account1 : ACCOUNT_LIST) {
+            if (account1.getId() == accountId) {
+                currentAccount = account1;
+                break;
+            }
+        }
+        if (currentAccount != null) {
+            for (Transaction transaction : currentAccount.getTransactions(1)) {
+                if (transaction.getTransactionId() == transactionId) {
+                    return transaction;
+                }
+            }
+
+        }
+        throw new TransactionNotFoundException("Transaction with Id " +  transactionId + " is not found");
+
+    }
+
+    /*public void getTransaction()
+    {
+        //Collections.sort(transactions);
+        for (int i = 0; i < transactions.size(); i++)
+        {
+            Transaction myLog = transactions.get(i);
+            System.out.println(myLog);
+        }
+    }*/
+}

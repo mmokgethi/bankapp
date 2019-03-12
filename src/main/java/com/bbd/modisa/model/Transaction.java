@@ -27,6 +27,15 @@ public class Transaction {
 
     private List<String> trans = new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "transactionId=" + transactionId +
+                ", transactionType=" + transactionType +
+                ", amount=" + amount +
+                '}';
+    }
+
     public Integer getTransactionId() {
         return transactionId;
     }
@@ -43,11 +52,11 @@ public class Transaction {
         this.transactionType = transactionType;
     }
 
-    /*public List<String> getTrans() {
+    public List<String> getTrans() {
         return trans;
     }
 
     public void setTrans(List<String> trans) {
         this.trans = trans;
-    }*/
+    }
 }

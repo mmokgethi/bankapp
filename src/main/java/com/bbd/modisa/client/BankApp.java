@@ -1,12 +1,17 @@
 package com.bbd.modisa.client;
 
+import com.bbd.modisa.data.AccountDB;
 import com.bbd.modisa.data.TransactionLog;
 import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.model.Account;
 import com.bbd.modisa.model.AccountType;
+import com.bbd.modisa.model.Transaction;
+import com.bbd.modisa.model.TransactionType;
 import com.bbd.modisa.service.AccountService;
 import com.bbd.modisa.service.ChequeAccountService;
 import com.bbd.modisa.service.SavingsAccountService;
+
+import java.util.List;
 import java.util.Scanner;
 
 public class BankApp {
@@ -22,8 +27,10 @@ public class BankApp {
         AccountService accountServices = createAccountService(accType);
 
         Account saving = accountServices.createAccount(1);
-        System.out.println(saving.getAccountType() + " Account Created Successfully" + saving+ "\n");
+        System.out.println(saving.getAccountType() + " Account Created Successfully"/* + saving+ "\n"*/);
         tl.getAccount(saving.getAccountType());
+
+        Account account = new Account(1, saving.getAccountType());
 
         while (cont == 'Y') {
             System.out.print("Which Action would you like to perform in your " + saving.getAccountType() +
@@ -35,17 +42,23 @@ public class BankApp {
             } else if (optS == 'W') {
                 withdrawal();
 
-                accountServices.withdraw(amount);
+                accountServices.withdraw(amount, account);
                 tl.getWithdraw(amount);
                 System.out.print("Withdraw Successfully\nYour Current Balance is R " +
                         String.format("%.2f",accountServices.getBalance()));
             } else if (optS == 'C') {
                 System.out.print("Your Current Balance is = R " + String.format("%.2f",  accountServices.getBalance()));
-            } else if (optS == 'L')
-                log();
+            } else if (optS == 'L') {
+                AccountDB.getAllTransactions(1);
+            }
             System.out.print("\nWould you like to perform another accountService?(Y/N): ");
             cont = scanner.next().charAt(0);
         }
+    }
+
+    public void transactions()
+    {
+
     }
 
     public static void deposit()
