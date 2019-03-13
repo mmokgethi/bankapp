@@ -7,8 +7,7 @@ import com.bbd.modisa.model.SavingsAccount;
 import com.bbd.modisa.model.Transaction;
 import com.bbd.modisa.model.TransactionType;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class SavingsAccountService implements AccountService {
 
@@ -16,6 +15,7 @@ public class SavingsAccountService implements AccountService {
     private List<String> trans = new ArrayList<String>();
     private double myBal;
     private static Transaction transactions;
+    private static int counter = 0;
 
     public Account createAccount(int accountNo) {
         SavingsAccount savingsAccount = new SavingsAccount(accountNo);
@@ -24,11 +24,12 @@ public class SavingsAccountService implements AccountService {
     }
 
     public double deposit(double depositAmount, Account account) {
-        transactions = new Transaction(1, TransactionType.DEPOSIT, depositAmount);
-        //account.getTransactions().add(transactions);
+        counter++;
+        transactions = new Transaction(counter, TransactionType.DEPOSIT, depositAmount);
+        //account.getTransactions(1).add(transactions);
         AccountDB.updateAccount(account.getId(),transactions);
         myBal = ((getBalance() + depositAmount) - saveTransFee);
-        trans.add("Deposited: + " + depositAmount);
+        //trans.add("Deposited: + " + depositAmount);
         return myBal;
     }
 
@@ -36,8 +37,8 @@ public class SavingsAccountService implements AccountService {
         if (withdrawalAmount > getBalance()) {
             throw new InsufficientFundsException("Insufficient funds");
         } else {
-            transactions = new Transaction(1, TransactionType.WITHDRAWAL, withdrawalAmount);
-            //account.getTransactions().add(transactions);
+            transactions = new Transaction(counter++, TransactionType.WITHDRAWAL, withdrawalAmount);
+            //account.getTransactions(1).add(transactions);
             AccountDB.updateAccount(account.getId(),transactions);
             myBal = (getBalance() - withdrawalAmount) - saveTransFee;
             //trans.add("Withdrawn: R" + withdrawalAmount);
@@ -46,7 +47,18 @@ public class SavingsAccountService implements AccountService {
     }
 
     public List<Transaction> getAllTransactions(int accountNo) {
-        return AccountDB.getAllTransactions(accountNo);
+        return AccountDB.getAllTransactions(counter++);
+    }
+
+    public void getAllTransactionSort()
+    {
+        TreeSet<Transaction> treeSet = new TreeSet<>(AccountDB.getAllTransactions(1));
+
+        Iterator<Transaction> ascSorting = treeSet.iterator();
+        while(ascSorting.hasNext()) {
+            System.out.println(ascSorting.next());
+        }
+        //return treeSet;
     }
 
     public double getBalance() {

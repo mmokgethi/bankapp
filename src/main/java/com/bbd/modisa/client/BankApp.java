@@ -3,10 +3,7 @@ package com.bbd.modisa.client;
 import com.bbd.modisa.data.AccountDB;
 import com.bbd.modisa.data.TransactionLog;
 import com.bbd.modisa.exception.AccountNotFoundException;
-import com.bbd.modisa.model.Account;
-import com.bbd.modisa.model.AccountType;
-import com.bbd.modisa.model.Transaction;
-import com.bbd.modisa.model.TransactionType;
+import com.bbd.modisa.model.*;
 import com.bbd.modisa.service.AccountService;
 import com.bbd.modisa.service.ChequeAccountService;
 import com.bbd.modisa.service.SavingsAccountService;
@@ -50,15 +47,16 @@ public class BankApp {
                 System.out.print("Your Current Balance is = R " + String.format("%.2f",  accountServices.getBalance()));
             } else if (optS == 'L') {
                 AccountDB.getAllTransactions(1);
+                /*for (int i = 0; i < account.getTransactions(1).size(); i++)
+                {
+                    Transaction myLog = account.getTransactions(1).get(i);
+                    System.out.println(myLog);
+                }*/
+                log();
             }
             System.out.print("\nWould you like to perform another accountService?(Y/N): ");
             cont = scanner.next().charAt(0);
         }
-    }
-
-    public void transactions()
-    {
-
     }
 
     public static void deposit()
@@ -92,9 +90,12 @@ public class BankApp {
         char opt = scanner.next().charAt(0);
         if (opt == 'H')
         {
-            tl.accType();
+            /*tl.accType();
             System.out.println("___________________");
-            tl.transactions();
+            tl.transactions();*/
+            SavingsAccountService savingsAccountService = new SavingsAccountService();
+
+            savingsAccountService.getAllTransactionSort();
         }
         else if (opt == 'L')
         {

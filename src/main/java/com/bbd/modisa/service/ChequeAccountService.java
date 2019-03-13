@@ -21,7 +21,8 @@ public class ChequeAccountService implements AccountService {
 
     public double deposit(double depositAmount,Account accountNo) {
         trans = new Transaction(1, TransactionType.DEPOSIT,depositAmount);
-        accountNo.getTransactions(1).add(trans);
+        accountNo.getTransactions().add(trans);
+        //AccountDB.updateAccount(accountNo.getId(),trans);
         myBal = ((getBalance() + depositAmount) - checkTransFee);
         return myBal;
     }
@@ -32,7 +33,8 @@ public class ChequeAccountService implements AccountService {
         }
         else {
             trans = new Transaction(1, TransactionType.WITHDRAWAL, withdrawalAmount);
-            accountNo.getTransactions(1).add(trans);
+            accountNo.getTransactions().add(trans);
+            //AccountDB.updateAccount(accountNo.getId(),trans);
             myBal = (getBalance() - withdrawalAmount) - checkTransFee;
         }
         return myBal;

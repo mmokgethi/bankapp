@@ -39,7 +39,7 @@ public class Account {
         this.id = id;
     }
 
-    public List<Transaction> getTransactions(int accountNo) {
+    public List<Transaction> getTransactions() {
         return transactions == null ? new ArrayList<>() : transactions;
     }
 }

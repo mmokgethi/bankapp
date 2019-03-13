@@ -19,7 +19,7 @@ public class AccountDB {
     public static Account updateAccount(int accountId, Transaction transaction) {
         for (Account account : ACCOUNT_LIST) {
             if (account.getId() == accountId) {
-                account.getTransactions(1).add(transaction);
+                account.getTransactions().add(transaction);
                 return account;
             }
         }
@@ -27,11 +27,20 @@ public class AccountDB {
     }
 
     public static List<Transaction> getAllTransactions(int accountNo) {
+        for (Account account : ACCOUNT_LIST) {
+            if (account.getId() == accountNo) {
+                System.out.println(account + "\n");
+                return account.getTransactions();
+            }
+        }
+        throw new AccountNotFoundException("Account detail not found");
+/*
         for (int i = 0; i < ACCOUNT_LIST.size(); i++) {
             Account log = ACCOUNT_LIST.get(i);
+            if ()
             System.out.println(log);
         }
-        return getAllTransactions(1);
+        return getAllTransactions(1);*/
     }
 
     public static Transaction getAccountTransaction(int accountId, int transactionId) {
@@ -43,7 +52,7 @@ public class AccountDB {
             }
         }
         if (currentAccount != null) {
-            for (Transaction transaction : currentAccount.getTransactions(1)) {
+            for (Transaction transaction : currentAccount.getTransactions()) {
                 if (transaction.getTransactionId() == transactionId) {
                     return transaction;
                 }
@@ -53,14 +62,4 @@ public class AccountDB {
         throw new TransactionNotFoundException("Transaction with Id " +  transactionId + " is not found");
 
     }
-
-    /*public void getTransaction()
-    {
-        //Collections.sort(transactions);
-        for (int i = 0; i < transactions.size(); i++)
-        {
-            Transaction myLog = transactions.get(i);
-            System.out.println(myLog);
-        }
-    }*/
 }
