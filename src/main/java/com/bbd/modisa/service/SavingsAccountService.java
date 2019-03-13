@@ -26,10 +26,8 @@ public class SavingsAccountService implements AccountService {
     public double deposit(double depositAmount, Account account) {
         counter++;
         transactions = new Transaction(counter, TransactionType.DEPOSIT, depositAmount);
-        //account.getTransactions(1).add(transactions);
         AccountDB.updateAccount(account.getId(),transactions);
         myBal = ((getBalance() + depositAmount) - saveTransFee);
-        //trans.add("Deposited: + " + depositAmount);
         return myBal;
     }
 
@@ -38,10 +36,9 @@ public class SavingsAccountService implements AccountService {
             throw new InsufficientFundsException("Insufficient funds");
         } else {
             transactions = new Transaction(counter++, TransactionType.WITHDRAWAL, withdrawalAmount);
-            //account.getTransactions(1).add(transactions);
             AccountDB.updateAccount(account.getId(),transactions);
             myBal = (getBalance() - withdrawalAmount) - saveTransFee;
-            //trans.add("Withdrawn: R" + withdrawalAmount);
+
         }
         return myBal;
     }
@@ -58,7 +55,6 @@ public class SavingsAccountService implements AccountService {
         while(ascSorting.hasNext()) {
             System.out.println(ascSorting.next());
         }
-        //return treeSet;
     }
 
     public double getBalance() {

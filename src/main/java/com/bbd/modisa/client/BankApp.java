@@ -1,31 +1,29 @@
 package com.bbd.modisa.client;
 
 import com.bbd.modisa.data.AccountDB;
-import com.bbd.modisa.data.TransactionLog;
 import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.model.*;
 import com.bbd.modisa.service.AccountService;
 import com.bbd.modisa.service.ChequeAccountService;
 import com.bbd.modisa.service.SavingsAccountService;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class BankApp {
     private static Scanner scanner = new Scanner(System.in);
     private static char accType;
     private static Double amount;
-    private static TransactionLog tl = new TransactionLog();
+    private static int accountNo = 0;
 
     private static void chequeSavings()
     {
+        accountNo++;
         char cont = 'Y';
         createAccountService(accType);
         AccountService accountServices = createAccountService(accType);
 
-        Account saving = accountServices.createAccount(1);
+        Account saving = accountServices.createAccount(accountNo);
         System.out.println(saving.getAccountType() + " Account Created Successfully"/* + saving+ "\n"*/);
-        tl.getAccount(saving.getAccountType());
 
         Account account = new Account(1, saving.getAccountType());
 
@@ -40,13 +38,12 @@ public class BankApp {
                 withdrawal();
 
                 accountServices.withdraw(amount, account);
-                tl.getWithdraw(amount);
                 System.out.print("Withdraw Successfully\nYour Current Balance is R " +
                         String.format("%.2f",accountServices.getBalance()));
             } else if (optS == 'C') {
                 System.out.print("Your Current Balance is = R " + String.format("%.2f",  accountServices.getBalance()));
             } else if (optS == 'L') {
-                AccountDB.getAllTransactions(1);
+                AccountDB.getAllTransactions(accountNo);
                 /*for (int i = 0; i < account.getTransactions(1).size(); i++)
                 {
                     Transaction myLog = account.getTransactions(1).get(i);
@@ -65,7 +62,6 @@ public class BankApp {
 
         System.out.print("Enter the amount you would like to Deposit: R");
         amount = depAmount.nextDouble();
-        tl.getDeposit(amount);
     }
 
     public static void main(String[] args) {
@@ -90,18 +86,16 @@ public class BankApp {
         char opt = scanner.next().charAt(0);
         if (opt == 'H')
         {
-            /*tl.accType();
-            System.out.println("___________________");
-            tl.transactions();*/
             SavingsAccountService savingsAccountService = new SavingsAccountService();
 
             savingsAccountService.getAllTransactionSort();
         }
         else if (opt == 'L')
         {
-            tl.accType();
-            System.out.println("___________________");
-            tl.transactionsR();
+            System.out.print("Enter transaction id you would like to retrieve: ");
+            int tranId = scanner.nextInt();
+
+            System.out.println(AccountDB.getAccountTransaction(accountNo, tranId));
         }
     }
 
