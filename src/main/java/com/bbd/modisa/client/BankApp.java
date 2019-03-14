@@ -3,10 +3,7 @@ package com.bbd.modisa.client;
 import com.bbd.modisa.data.AccountDB;
 import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.model.*;
-import com.bbd.modisa.service.AccountService;
-import com.bbd.modisa.service.AccountServiceProvider;
-import com.bbd.modisa.service.ChequeAccountService;
-import com.bbd.modisa.service.SavingsAccountService;
+import com.bbd.modisa.service.*;
 
 import java.util.EnumMap;
 import java.util.Scanner;
@@ -15,6 +12,7 @@ public class BankApp {
     private static Scanner scanner = new Scanner(System.in);
     private static Double amount;
     private static int accountNo = 0;
+    private static AccountServiceFactory accountServiceFactory = new AccountServiceFactory();
 
     private static void chequeSavings(AccountService accountServices)
     {
@@ -84,7 +82,9 @@ public class BankApp {
         char opt = scanner.next().charAt(0);
         if (opt == 'H')
         {
-            SavingsAccountService savingsAccountService = (SavingsAccountService) AccountServiceProvider.getAccountService(AccountType.Savings);
+            SavingsAccountService savingsAccountService = (SavingsAccountService) accountServiceFactory.
+                    getAccountService(AccountType.Savings);
+                    //(SavingsAccountService) AccountServiceProvider.getAccountService(AccountType.Savings);
 
             savingsAccountService.getAllTransactionSort();
         }
@@ -99,6 +99,7 @@ public class BankApp {
 
     private static AccountService createAccountService(char accType)
     {
+
         AccountType acctType;
 
         if (accType == 'S')
@@ -107,6 +108,6 @@ public class BankApp {
             acctType = AccountType.Cheque;
         else
             throw new AccountNotFoundException("Invalid Account");
-        return AccountServiceProvider.getAccountService(acctType);
+        return accountServiceFactory.getAccountService(acctType); //AccountServiceProvider.getAccountService(acctType);
     }
 }
