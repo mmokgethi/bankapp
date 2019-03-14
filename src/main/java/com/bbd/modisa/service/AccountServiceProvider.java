@@ -22,7 +22,6 @@ public class AccountServiceProvider {
         AccountService accountService = accountType == AccountType.Cheque ? new ChequeAccountService() :
                 new SavingsAccountService();
         accountServiceCache.put(accountType, accountService);
-        System.out.println("get account service");
         return accountService;
     }
 }

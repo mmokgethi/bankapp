@@ -15,7 +15,6 @@ public class BankApp {
     private static Scanner scanner = new Scanner(System.in);
     private static Double amount;
     private static int accountNo = 0;
-    public static EnumMap<AccountType, AccountService> tranMap = new EnumMap<>(AccountType.class);
 
     private static void chequeSavings(AccountService accountServices)
     {
@@ -43,11 +42,6 @@ public class BankApp {
                 System.out.print("Your Current Balance is = R " + String.format("%.2f",  accountServices.getBalance()));
             } else if (optS == 'L') {
                 AccountDB.getAllTransactions(accountNo);
-                /*for (int i = 0; i < account.getTransactions(1).size(); i++)
-                {
-                    Transaction myLog = account.getTransactions(1).get(i);
-                    System.out.println(myLog);
-                }*/
                 log();
             }
             System.out.print("\nWould you like to perform another accountService?(Y/N): ");
@@ -55,11 +49,6 @@ public class BankApp {
         }
     }
 
-    public static void  services()
-    {
-        tranMap.put(AccountType.Savings, SavingsAccountService.getSavingsAccountService());
-        tranMap.put(AccountType.Cheque, ChequeAccountService.getChequeAccountService());
-    }
 
     public static void deposit()
     {
@@ -91,13 +80,11 @@ public class BankApp {
 
     private static void log()
     {
-        services();
-
         System.out.print("How would you like to sort your Log? From High(H)/From Low(L): ");
         char opt = scanner.next().charAt(0);
         if (opt == 'H')
         {
-            SavingsAccountService savingsAccountService = (SavingsAccountService) tranMap.get(AccountType.Savings);
+            SavingsAccountService savingsAccountService = (SavingsAccountService) AccountServiceProvider.getAccountService(AccountType.Savings);
 
             savingsAccountService.getAllTransactionSort();
         }
@@ -112,10 +99,6 @@ public class BankApp {
 
     private static AccountService createAccountService(char accType)
     {
-        /*tranMap.put(AccountType.Cheque, SavingsAccountService.getSavingsAccountService());
-        tranMap.put(AccountType.Savings, SavingsAccountService.getSavingsAccountService());*/
-
-       // services();
         AccountType acctType;
 
         if (accType == 'S')
