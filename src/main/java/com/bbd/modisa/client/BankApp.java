@@ -7,6 +7,7 @@ import com.bbd.modisa.service.AccountService;
 import com.bbd.modisa.service.ChequeAccountService;
 import com.bbd.modisa.service.SavingsAccountService;
 
+import java.util.EnumMap;
 import java.util.Scanner;
 
 public class BankApp {
@@ -14,6 +15,7 @@ public class BankApp {
     private static char accType;
     private static Double amount;
     private static int accountNo = 0;
+    public static EnumMap<AccountType, AccountService> tranMap = new EnumMap<>(AccountType.class);
 
     private static void chequeSavings()
     {
@@ -56,6 +58,12 @@ public class BankApp {
         }
     }
 
+    public static void  services()
+    {
+        tranMap.put(AccountType.Savings, SavingsAccountService.getSavingsAccountService());
+        tranMap.put(AccountType.Cheque, ChequeAccountService.getChequeAccountService());
+    }
+
     public static void deposit()
     {
         Scanner depAmount = new Scanner(System.in);
@@ -82,11 +90,13 @@ public class BankApp {
 
     private static void log()
     {
+        services();
+
         System.out.print("How would you like to sort your Log? From High(H)/From Low(L): ");
         char opt = scanner.next().charAt(0);
         if (opt == 'H')
         {
-            SavingsAccountService savingsAccountService = new SavingsAccountService();
+            SavingsAccountService savingsAccountService = (SavingsAccountService) tranMap.get(AccountType.Savings);
 
             savingsAccountService.getAllTransactionSort();
         }
@@ -101,6 +111,10 @@ public class BankApp {
 
     private static AccountService createAccountService(char accType)
     {
+        /*tranMap.put(AccountType.Cheque, SavingsAccountService.getSavingsAccountService());
+        tranMap.put(AccountType.Savings, SavingsAccountService.getSavingsAccountService());*/
+
+        services();
         AccountType acctType;
 
         if (accType == 'S')
@@ -109,6 +123,6 @@ public class BankApp {
             acctType = AccountType.Cheque;
         else
             throw new AccountNotFoundException("Invalid Account");
-        return acctType == AccountType.Cheque ? new ChequeAccountService() :  new SavingsAccountService() ;
+        return acctType == AccountType.Cheque ? tranMap.get(AccountType.Cheque) :  tranMap.get(AccountType.Savings);
     }
 }
