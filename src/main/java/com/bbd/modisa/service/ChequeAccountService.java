@@ -16,9 +16,6 @@ public class ChequeAccountService implements AccountService {
     private static Transaction trans;
     private static ChequeAccountService chequeAccountService;
 
-    private ChequeAccountService()
-    {}
-
     public Account createAccount(int accountNo) {
         return new CheckAccount(accountNo);
     }

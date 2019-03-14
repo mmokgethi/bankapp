@@ -53,6 +53,5 @@ public class AccountDB {
 
         }
         throw new TransactionNotFoundException("Transaction with Id " +  transactionId + " is not found");
-
     }
 }

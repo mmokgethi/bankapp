@@ -18,8 +18,6 @@ public class SavingsAccountService implements AccountService {
     private static int counter = 0;
     private static SavingsAccountService savingsAccountService;
 
-    private SavingsAccountService()
-    {}
 
     public static SavingsAccountService getSavingsAccountService() {
         if (savingsAccountService == null){
