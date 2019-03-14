@@ -17,7 +17,7 @@ public class AccountServiceFactory {
         }
         else if (accountType == AccountType.Cheque)
         {
-            accountService = new  SavingsAccountService();
+            accountService = new ChequeAccountService();
         }
         return accountService;
     }

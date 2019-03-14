@@ -42,7 +42,6 @@ public class SavingsAccountService implements AccountService {
         return myBal;
     }
 
-
     public void getAllTransactionSort()
     {
         TreeSet<Transaction> treeSet = new TreeSet<>(AccountDB.getAllTransactions(1));

@@ -12,7 +12,6 @@ public class BankApp {
     private static Scanner scanner = new Scanner(System.in);
     private static Double amount;
     private static int accountNo = 0;
-    private static AccountServiceFactory accountServiceFactory = new AccountServiceFactory();
 
     private static void chequeSavings(AccountService accountServices) {
         accountNo++;
@@ -39,7 +38,7 @@ public class BankApp {
                 System.out.print("Your Current Balance is = R " + String.format("%.2f",  accountServices.getBalance()));
             } else if (optS == 'L') {
                 AccountDB.getAllTransactions(accountNo);
-                log();
+                log(new SavingsAccountService());
             }
             System.out.print("\nWould you like to perform another accountService?(Y/N): ");
             cont = scanner.next().charAt(0);
@@ -73,13 +72,10 @@ public class BankApp {
         amount = withAmt.nextDouble();
     }
 
-    private static void log() {
+    private static void log(SavingsAccountService savingsAccountService) {
         System.out.print("How would you like to sort your Log? From High(H)/From Low(L): ");
         char opt = scanner.next().charAt(0);
         if (opt == 'H') {
-            SavingsAccountService savingsAccountService = (SavingsAccountService) accountServiceFactory.
-                    getAccountService(AccountType.Savings);
-
             savingsAccountService.getAllTransactionSort();
         }
         else if (opt == 'L') {
@@ -91,6 +87,7 @@ public class BankApp {
     }
 
     private static AccountService createAccountService(char accType) {
+        AccountServiceFactory accountServiceFactory = new AccountServiceFactory();
         AccountType acctType;
 
         if (accType == 'S')
