@@ -34,13 +34,6 @@ public class AccountDB {
             }
         }
         throw new AccountNotFoundException("Account detail not found");
-/*
-        for (int i = 0; i < ACCOUNT_LIST.size(); i++) {
-            Account log = ACCOUNT_LIST.get(i);
-            if ()
-            System.out.println(log);
-        }
-        return getAllTransactions(1);*/
     }
 
     public static Transaction getAccountTransaction(int accountId, int transactionId) {
@@ -60,6 +53,5 @@ public class AccountDB {
 
         }
         throw new TransactionNotFoundException("Transaction with Id " +  transactionId + " is not found");
-
     }
 }

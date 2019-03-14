@@ -16,6 +16,15 @@ public class SavingsAccountService implements AccountService {
     private double myBal;
     private static Transaction transactions;
     private static int counter = 0;
+    private static SavingsAccountService savingsAccountService;
+
+
+    public static SavingsAccountService getSavingsAccountService() {
+        if (savingsAccountService == null){
+            savingsAccountService = new SavingsAccountService();
+        }
+        return savingsAccountService;
+    }
 
     public Account createAccount(int accountNo) {
         SavingsAccount savingsAccount = new SavingsAccount(accountNo);
