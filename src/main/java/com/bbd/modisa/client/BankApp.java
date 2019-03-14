@@ -14,8 +14,7 @@ public class BankApp {
     private static int accountNo = 0;
     private static AccountServiceFactory accountServiceFactory = new AccountServiceFactory();
 
-    private static void chequeSavings(AccountService accountServices)
-    {
+    private static void chequeSavings(AccountService accountServices) {
         accountNo++;
         char cont = 'Y';
         Account saving = accountServices.createAccount(accountNo);
@@ -48,8 +47,7 @@ public class BankApp {
     }
 
 
-    public static void deposit()
-    {
+    public static void deposit() {
         Scanner depAmount = new Scanner(System.in);
 
         System.out.print("Enter the amount you would like to Deposit: R");
@@ -68,28 +66,23 @@ public class BankApp {
         } while (accType != 'T');
     }
 
-    private static void withdrawal()
-    {
+    private static void withdrawal() {
         Scanner withAmt = new Scanner(System.in);
 
         System.out.print("Enter the amount to Withdraw: R");
         amount = withAmt.nextDouble();
     }
 
-    private static void log()
-    {
+    private static void log() {
         System.out.print("How would you like to sort your Log? From High(H)/From Low(L): ");
         char opt = scanner.next().charAt(0);
-        if (opt == 'H')
-        {
+        if (opt == 'H') {
             SavingsAccountService savingsAccountService = (SavingsAccountService) accountServiceFactory.
                     getAccountService(AccountType.Savings);
-                    //(SavingsAccountService) AccountServiceProvider.getAccountService(AccountType.Savings);
 
             savingsAccountService.getAllTransactionSort();
         }
-        else if (opt == 'L')
-        {
+        else if (opt == 'L') {
             System.out.print("Enter transaction id you would like to retrieve: ");
             int tranId = scanner.nextInt();
 
@@ -97,9 +90,7 @@ public class BankApp {
         }
     }
 
-    private static AccountService createAccountService(char accType)
-    {
-
+    private static AccountService createAccountService(char accType) {
         AccountType acctType;
 
         if (accType == 'S')
@@ -108,6 +99,6 @@ public class BankApp {
             acctType = AccountType.Cheque;
         else
             throw new AccountNotFoundException("Invalid Account");
-        return accountServiceFactory.getAccountService(acctType); //AccountServiceProvider.getAccountService(acctType);
+        return accountServiceFactory.getAccountService(acctType);
     }
 }

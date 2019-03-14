@@ -13,7 +13,6 @@ public interface AccountService {
 
     double withdraw(double withdrawalAmount, Account account);
 
-    List<Transaction> getAllTransactions(int accountNo);
     double getBalance();
 
 }

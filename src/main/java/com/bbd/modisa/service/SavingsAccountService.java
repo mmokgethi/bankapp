@@ -12,7 +12,6 @@ import java.util.*;
 public class SavingsAccountService implements AccountService {
 
     private static Double saveTransFee = 1.5;
-    private List<String> trans = new ArrayList<String>();
     private double myBal;
     private static Transaction transactions;
     private static int counter = 0;
@@ -43,9 +42,6 @@ public class SavingsAccountService implements AccountService {
         return myBal;
     }
 
-    public List<Transaction> getAllTransactions(int accountNo) {
-        return AccountDB.getAllTransactions(counter++);
-    }
 
     public void getAllTransactionSort()
     {

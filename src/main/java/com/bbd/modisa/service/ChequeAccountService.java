@@ -14,25 +14,15 @@ public class ChequeAccountService implements AccountService {
     private static Double checkTransFee = 3.5;
     private double myBal;
     private static Transaction trans;
-    private static ChequeAccountService chequeAccountService;
 
     public Account createAccount(int accountNo) {
         return new CheckAccount(accountNo);
     }
 
-    public static ChequeAccountService getChequeAccountService()
-    {
-        if (chequeAccountService == null)
-        {
-            chequeAccountService = new ChequeAccountService();
-        }
-        return chequeAccountService;
-    }
 
     public double deposit(double depositAmount,Account accountNo) {
         trans = new Transaction(1, TransactionType.DEPOSIT,depositAmount);
         accountNo.getTransactions().add(trans);
-        //AccountDB.updateAccount(accountNo.getId(),trans);
         myBal = ((getBalance() + depositAmount) - checkTransFee);
         return myBal;
     }
@@ -44,14 +34,9 @@ public class ChequeAccountService implements AccountService {
         else {
             trans = new Transaction(1, TransactionType.WITHDRAWAL, withdrawalAmount);
             accountNo.getTransactions().add(trans);
-            //AccountDB.updateAccount(accountNo.getId(),trans);
             myBal = (getBalance() - withdrawalAmount) - checkTransFee;
         }
         return myBal;
-    }
-
-    public List<Transaction> getAllTransactions(int account) {
-        return AccountDB.getAllTransactions(1);
     }
 
     public double getBalance() {
