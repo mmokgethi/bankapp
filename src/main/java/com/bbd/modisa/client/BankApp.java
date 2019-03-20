@@ -1,10 +1,12 @@
 package com.bbd.modisa.client;
 
 import com.bbd.modisa.data.AccountDB;
+import com.bbd.modisa.data.ConnectionConfig;
 import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.model.*;
 import com.bbd.modisa.service.*;
 
+import java.sql.Connection;
 import java.util.EnumMap;
 import java.util.Scanner;
 
@@ -12,6 +14,40 @@ public class BankApp {
     private static Scanner scanner = new Scanner(System.in);
     private static Double amount;
     private static int accountNo = 0;
+
+    public static void createUser()
+    {
+        System.out.print("Enter your FirstName: ");
+        String fName = scanner.nextLine();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private static void chequeSavings(AccountService accountServices) {
         accountNo++;
@@ -54,6 +90,17 @@ public class BankApp {
     }
 
     public static void main(String[] args) {
+        Connection connection = null;
+
+        try {
+            connection = ConnectionConfig.getConnection();
+            if (connection != null){
+                System.out.println("connection established");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         char accType;
         do {
             System.out.print("What type of account would you like to create? Cheque(C)/Savings(S): ");
