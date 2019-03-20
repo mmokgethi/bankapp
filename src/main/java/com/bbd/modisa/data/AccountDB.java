@@ -23,7 +23,7 @@ public class AccountDB {
                 return account;
             }
         }
-        throw new AccountNotFoundException("Account not found in the database");
+        throw new AccountNotFoundException("DataAccount not found in the database");
     }
 
     public static List<Transaction> getAllTransactions(int accountNo) {
@@ -33,7 +33,7 @@ public class AccountDB {
                 return account.getTransactions();
             }
         }
-        throw new AccountNotFoundException("Account detail not found");
+        throw new AccountNotFoundException("DataAccount detail not found");
     }
 
     public static Transaction getAccountTransaction(int accountId, int transactionId) {

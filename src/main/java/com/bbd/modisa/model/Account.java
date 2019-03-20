@@ -16,7 +16,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
+        return "DataAccount{" +
                 "id=" + id +
                 ", balance=" + balance +
                 ", accountType=" + accountType +

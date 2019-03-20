@@ -1,21 +1,33 @@
 package com.bbd.modisa.data.entities;
 
-public class Account {
+import com.sun.xml.internal.ws.api.ha.StickyFeature;
+
+public class DataAccount {
     private int accId;
     private Double availBalance;
     private int userId;
+    public String accType;
 
-    public Account(){
+    public DataAccount(){
 
     }
 
-    public Account(Double availBalance, int userId){
+    public DataAccount(Double availBalance, int userId, String accType){
         this.availBalance = availBalance;
         this.userId = userId;
+        this.accType = accType;
     }
 
     public int getAccId() {
         return accId;
+    }
+
+    public String getAccType() {
+        return accType;
+    }
+
+    public void setAccType(String accType) {
+        this.accType = accType;
     }
 
     public void setAccId(int accId) {
@@ -40,7 +52,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Account{" +
+        return "DataAccount{" +
                 "accId=" + accId +
                 ", availBalance=" + availBalance +
                 ", userId=" + userId +

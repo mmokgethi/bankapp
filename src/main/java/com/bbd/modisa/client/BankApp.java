@@ -1,16 +1,15 @@
 package com.bbd.modisa.client;
 
 import com.bbd.modisa.data.AccountDB;
-import com.bbd.modisa.data.ConnectionConfig;
+import com.bbd.modisa.data.datamodel.CreateAccount;
 import com.bbd.modisa.data.datamodel.CreateUser;
+import com.bbd.modisa.data.entities.DataAccount;
 import com.bbd.modisa.data.entities.User;
 import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.model.*;
 import com.bbd.modisa.service.*;
 
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.EnumMap;
 import java.util.Scanner;
 
 public class BankApp {
@@ -28,6 +27,25 @@ public class BankApp {
 
         User user = new User(fName, lName);
         makeUser.createUser(user);
+        System.out.println("Account created successfully, you user id is: " + makeUser.showId());
+    }
+
+    public static void createAccount() throws SQLException {
+        CreateAccount account = new CreateAccount();
+
+        System.out.print("Enter your user id to create account of your choice: ");
+        int userId = scanner.nextInt();
+        DataAccount dataAccount = null;
+
+        System.out.print("Enter the type of account you would like to create: ");
+        char accountType = scanner.next().charAt(0);
+
+        if (accountType == 'C'){
+            dataAccount = new DataAccount(0D, userId, AccountType.Cheque.name());
+        }else if (accountType == 'S'){
+            dataAccount = new DataAccount(0D, userId, AccountType.Savings.name());
+        }
+        account.createAcc(dataAccount);
     }
 
 
@@ -63,13 +81,13 @@ public class BankApp {
         accountNo++;
         char cont = 'Y';
         Account saving = accountServices.createAccount(accountNo);
-        System.out.println(saving.getAccountType() + " Account Created Successfully"/* + saving+ "\n"*/);
+        System.out.println(saving.getAccountType() + " DataAccount Created Successfully"/* + saving+ "\n"*/);
 
         Account account = new Account(1, saving.getAccountType());
 
         while (cont == 'Y') {
             System.out.print("Which Action would you like to perform in your " + saving.getAccountType() +
-                    " Account? Deposit(D)/Withdrawal(W)/Check Balance(C)/Transaction Log(L): ");
+                    " DataAccount? Deposit(D)/Withdrawal(W)/Check Balance(C)/Transaction Log(L): ");
             char optS = scanner.next().charAt(0);
             if (optS == 'D') {
                 deposit();
@@ -100,7 +118,13 @@ public class BankApp {
     }
 
     public static void main(String[] args) throws SQLException {
-        createUser();
+
+        System.out.print("Enter (N) for New Account/(E) to login: ");
+        //char userType = scanner.next().charAt(0);
+
+
+        //createUser();
+        createAccount();
 
         char accType;
         do {
@@ -143,7 +167,7 @@ public class BankApp {
         else if (accType == 'C')
             acctType = AccountType.Cheque;
         else
-            throw new AccountNotFoundException("Invalid Account");
+            throw new AccountNotFoundException("Invalid DataAccount");
         return accountServiceFactory.getAccountService(acctType);
     }
 }
