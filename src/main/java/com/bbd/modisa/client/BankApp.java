@@ -2,11 +2,14 @@ package com.bbd.modisa.client;
 
 import com.bbd.modisa.data.AccountDB;
 import com.bbd.modisa.data.ConnectionConfig;
+import com.bbd.modisa.data.datamodel.CreateUser;
+import com.bbd.modisa.data.entities.User;
 import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.model.*;
 import com.bbd.modisa.service.*;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.EnumMap;
 import java.util.Scanner;
 
@@ -15,11 +18,16 @@ public class BankApp {
     private static Double amount;
     private static int accountNo = 0;
 
-    public static void createUser()
-    {
-        System.out.print("Enter your FirstName: ");
+    public static void createUser() throws SQLException {
+        CreateUser makeUser = new CreateUser();
+        System.out.print("Enter your First Name: ");
         String fName = scanner.nextLine();
 
+        System.out.print("Enter you Last Name: ");
+        String lName = scanner.nextLine();
+
+        User user = new User(fName, lName);
+        makeUser.createUser(user);
     }
 
 
@@ -50,6 +58,8 @@ public class BankApp {
 
 
     private static void chequeSavings(AccountService accountServices) {
+
+
         accountNo++;
         char cont = 'Y';
         Account saving = accountServices.createAccount(accountNo);
@@ -89,17 +99,8 @@ public class BankApp {
         amount = depAmount.nextDouble();
     }
 
-    public static void main(String[] args) {
-        Connection connection = null;
-
-        try {
-            connection = ConnectionConfig.getConnection();
-            if (connection != null){
-                System.out.println("connection established");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+    public static void main(String[] args) throws SQLException {
+        createUser();
 
         char accType;
         do {
