@@ -1,6 +1,6 @@
 package com.bbd.modisa.data.entities;
 
-public class User {
+public class User extends Account {
     private int userId;
     private String fName;
     private String lName;

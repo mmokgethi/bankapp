@@ -1,18 +1,16 @@
 package com.bbd.modisa.data.entities;
 
-import com.sun.xml.internal.ws.api.ha.StickyFeature;
-
-public class DataAccount {
-    private int accId;
-    private Double availBalance;
+public class Account {
+    private static int accId;
+    private static Double availBalance;
     private int userId;
-    public String accType;
+    public static String accType;
 
-    public DataAccount(){
+    public Account(){
 
     }
 
-    public DataAccount(Double availBalance, int userId, String accType){
+    public Account(Double availBalance, int userId, String accType){
         this.availBalance = availBalance;
         this.userId = userId;
         this.accType = accType;
@@ -26,20 +24,20 @@ public class DataAccount {
         return accType;
     }
 
-    public void setAccType(String accType) {
-        this.accType = accType;
+    public static void setAccType(String accType) {
+        Account.accType = accType;
     }
 
-    public void setAccId(int accId) {
-        this.accId = accId;
+    public static void setAccId(int accId) {
+        Account.accId = accId;
     }
 
     public Double getAvailBalance() {
         return availBalance;
     }
 
-    public void setAvailBalance(Double availBalance) {
-        this.availBalance = availBalance;
+    public static void setAvailBalance(Double availBalance) {
+        Account.availBalance = availBalance;
     }
 
     public int getUserId() {
@@ -52,7 +50,7 @@ public class DataAccount {
 
     @Override
     public String toString() {
-        return "DataAccount{" +
+        return "Account{" +
                 "accId=" + accId +
                 ", availBalance=" + availBalance +
                 ", userId=" + userId +

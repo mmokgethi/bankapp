@@ -7,14 +7,35 @@ public class Transaction implements Comparable<Transaction> {
 
     private Integer transactionId;
 
-    private TransactionType transactionType;
-
+    private String transactionType;
+    private int accId;
+    private int userId;
     private Double amount;
 
-    public Transaction(Integer transactionId, TransactionType transactionType, Double amount) {
+
+    public int getAccId() {
+        return accId;
+    }
+
+    public void setAccId(int accId) {
+        this.accId = accId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Transaction(){}
+    public Transaction(Double amount, String transactionType, int accId, int userId) {
         this.transactionId = transactionId;
         this.transactionType = transactionType;
         this.amount = amount;
+        this.userId = userId;
+        this.accId = accId;
     }
 
     public Double getAmount() {
@@ -31,7 +52,9 @@ public class Transaction implements Comparable<Transaction> {
     public String toString() {
         return "Transaction{" +
                 "transactionId=" + transactionId +
-                ", transactionType=" + transactionType +
+                ", transactionType='" + transactionType + '\'' +
+                ", accId=" + accId +
+                ", userId=" + userId +
                 ", amount=" + amount +
                 '}';
     }
@@ -44,11 +67,11 @@ public class Transaction implements Comparable<Transaction> {
         this.transactionId = transactionId;
     }
 
-    public TransactionType getTransactionType() {
+    public String getTransactionType() {
         return transactionType;
     }
 
-    public void setTransactionType(TransactionType transactionType) {
+    public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }
 

@@ -1,22 +1,20 @@
 package com.bbd.modisa.data.entities;
 
-public class Transaction {
+public class Transactions {
     private int tranId;
     private Double amount;
-    private Double balance;
-    private int tranTypeCode;
+    private String tranType;
     private int accId;
     private int userId;
 
-    public Transaction(){
+    public Transactions(){
 
     }
 
-    public Transaction(Double amount, Double balance, int tranTypeCode,
-                       int accId, int userId) {
+    public Transactions(Double amount, String tranType,
+                        int accId, int userId) {
         this.amount = amount;
-        this.balance = balance;
-        this.tranTypeCode = tranTypeCode;
+        this.tranType = tranType;
         this.accId = accId;
         this.userId = userId;
     }
@@ -37,20 +35,12 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Double getBalance() {
-        return balance;
+    public String getTranType() {
+        return tranType;
     }
 
-    public void setBalance(Double balance) {
-        this.balance = balance;
-    }
-
-    public int getTranTypeCode() {
-        return tranTypeCode;
-    }
-
-    public void setTranTypeCode(int tranTypeCode) {
-        this.tranTypeCode = tranTypeCode;
+    public void setTranTypeCode(String tranTypeCode) {
+        this.tranType = tranTypeCode;
     }
 
     public int getAccId() {
@@ -71,11 +61,10 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "Transactions{" +
                 "tranId=" + tranId +
                 ", amount=" + amount +
-                ", balance=" + balance +
-                ", tranTypeCode=" + tranTypeCode +
+                ", tranTypeCode=" + tranType +
                 ", accId=" + accId +
                 ", userId=" + userId +
                 '}';

@@ -4,7 +4,7 @@ package com.bbd.modisa.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
+public class Accounts {
     private Integer id;
     private Double balance;
     private AccountType accountType;
@@ -16,7 +16,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "DataAccount{" +
+        return "Account{" +
                 "id=" + id +
                 ", balance=" + balance +
                 ", accountType=" + accountType +
@@ -28,7 +28,7 @@ public class Account {
         return accountType;
     }
 
-    public Account(int nextId, AccountType acctType) {
+    public Accounts(int nextId, AccountType acctType) {
         id = nextId;
         balance = 0D;
         this.accountType = acctType;

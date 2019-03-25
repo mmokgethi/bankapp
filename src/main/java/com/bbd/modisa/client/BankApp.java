@@ -1,13 +1,12 @@
 package com.bbd.modisa.client;
 
-import com.bbd.modisa.data.AccountDB;
 import com.bbd.modisa.data.datamodel.CreateAccount;
+import com.bbd.modisa.data.datamodel.CreateTran;
 import com.bbd.modisa.data.datamodel.CreateUser;
-import com.bbd.modisa.data.entities.DataAccount;
+import com.bbd.modisa.data.datamodel.GetUser;
+import com.bbd.modisa.data.entities.Account;
 import com.bbd.modisa.data.entities.User;
-import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.model.*;
-import com.bbd.modisa.service.*;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -15,10 +14,12 @@ import java.util.Scanner;
 public class BankApp {
     private static Scanner scanner = new Scanner(System.in);
     private static Double amount;
-    private static int accountNo = 0;
+    public static CreateAccount account = new CreateAccount();
+    public static CreateTran tran = new CreateTran();
+    public static CreateUser makeUser = new CreateUser();
+    public static int userId;
 
     public static void createUser() throws SQLException {
-        CreateUser makeUser = new CreateUser();
         System.out.print("Enter your First Name: ");
         String fName = scanner.nextLine();
 
@@ -27,147 +28,72 @@ public class BankApp {
 
         User user = new User(fName, lName);
         makeUser.createUser(user);
-        System.out.println("Account created successfully, you user id is: " + makeUser.showId());
+        userId = makeUser.showId();
+        System.out.println("Accounts created successfully, you user id is: " + userId);
     }
 
     public static void createAccount() throws SQLException {
-        CreateAccount account = new CreateAccount();
+        if (userId == 0){
+            System.out.print("Enter your user id to create account of your choice: ");
+            userId = scanner.nextInt();
+        }else {
+            Account account = null;
 
-        System.out.print("Enter your user id to create account of your choice: ");
-        int userId = scanner.nextInt();
-        DataAccount dataAccount = null;
+            System.out.print("Enter the type of account you would like to create: ");
+            char accountType = scanner.next().charAt(0);
 
-        System.out.print("Enter the type of account you would like to create: ");
-        char accountType = scanner.next().charAt(0);
-
-        if (accountType == 'C'){
-            dataAccount = new DataAccount(0D, userId, AccountType.Cheque.name());
-        }else if (accountType == 'S'){
-            dataAccount = new DataAccount(0D, userId, AccountType.Savings.name());
-        }
-        account.createAcc(dataAccount);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private static void chequeSavings(AccountService accountServices) {
-
-
-        accountNo++;
-        char cont = 'Y';
-        Account saving = accountServices.createAccount(accountNo);
-        System.out.println(saving.getAccountType() + " DataAccount Created Successfully"/* + saving+ "\n"*/);
-
-        Account account = new Account(1, saving.getAccountType());
-
-        while (cont == 'Y') {
-            System.out.print("Which Action would you like to perform in your " + saving.getAccountType() +
-                    " DataAccount? Deposit(D)/Withdrawal(W)/Check Balance(C)/Transaction Log(L): ");
-            char optS = scanner.next().charAt(0);
-            if (optS == 'D') {
-                deposit();
-                System.out.print("Your Current Balance = R " + String.format("%.2f",accountServices.deposit(amount, saving)));
-            } else if (optS == 'W') {
-                withdrawal();
-
-                accountServices.withdraw(amount, account);
-                System.out.print("Withdraw Successfully\nYour Current Balance is R " +
-                        String.format("%.2f",accountServices.getBalance()));
-            } else if (optS == 'C') {
-                System.out.print("Your Current Balance is = R " + String.format("%.2f",  accountServices.getBalance()));
-            } else if (optS == 'L') {
-                AccountDB.getAllTransactions(accountNo);
-                log(new SavingsAccountService());
+            if (accountType == 'C'){
+                account = new Account(0D, userId, AccountType.Cheque.name());
+            }else if (accountType == 'S'){
+                account = new Account(0D, userId, AccountType.Savings.name());
             }
-            System.out.print("\nWould you like to perform another accountService?(Y/N): ");
-            cont = scanner.next().charAt(0);
+            BankApp.account.createAcc(account);
         }
     }
 
+    public static void getUser() throws SQLException {
+        if (userId == 0){
+            System.out.print("Enter your user id: ");
+            userId = scanner.nextInt();
+        }else{
+            GetUser  getUser = new GetUser();
 
-    public static void deposit() {
-        Scanner depAmount = new Scanner(System.in);
+            User user = getUser.getId(userId);
+            Account account = getUser.getId(userId);
 
-        System.out.print("Enter the amount you would like to Deposit: R");
-        amount = depAmount.nextDouble();
+            System.out.println(account.getAccId() + ", " + user.getUserId() + ", "
+                    + user.getfName() + ", "  + user.getlName() + ", " + account.getAccType() +
+                    ", " + account.getAvailBalance());
+        }
+        System.out.println(userId);
+    }
+
+    public static void performTrans() throws SQLException {
+        Transaction transaction = null;
+        CreateAccount createAccount = new CreateAccount();
+
+        System.out.print("Which transaction would you like to create: ");
+        char tranType = scanner.next().charAt(0);
+
+        if (tranType == 'D'){
+            System.out.print("Enter the amount you would like to deposit: ");
+            Double amount = scanner.nextDouble();
+            transaction = new Transaction(amount, TransactionType.DEPOSIT.name(), makeUser.getAccId(userId), userId);
+            createAccount.deposit(amount, makeUser.getAccId(userId));
+
+        }else if (tranType == 'W'){
+            System.out.print("Enter the amount you would like to withdraw: ");
+            Double amount = scanner.nextDouble();
+            transaction = new Transaction(amount, TransactionType.WITHDRAWAL.name(), makeUser.getAccId(userId), userId);
+            createAccount.withdrawal(amount, makeUser.getAccId(userId));
+        }
+        BankApp.tran.createTran(transaction);
     }
 
     public static void main(String[] args) throws SQLException {
-
-        System.out.print("Enter (N) for New Account/(E) to login: ");
-        //char userType = scanner.next().charAt(0);
-
-
-        //createUser();
+        createUser();
         createAccount();
-
-        char accType;
-        do {
-            System.out.print("What type of account would you like to create? Cheque(C)/Savings(S): ");
-            accType = scanner.next().charAt(0);
-            AccountService accountService = createAccountService(accType);
-            chequeSavings(accountService);
-            System.out.println("Would you like to continue?");
-            accType = scanner.next().charAt(0);
-        } while (accType != 'T');
-    }
-
-    private static void withdrawal() {
-        Scanner withAmt = new Scanner(System.in);
-
-        System.out.print("Enter the amount to Withdraw: R");
-        amount = withAmt.nextDouble();
-    }
-
-    private static void log(SavingsAccountService savingsAccountService) {
-        System.out.print("How would you like to sort your Log? From High(H)/From Low(L): ");
-        char opt = scanner.next().charAt(0);
-        if (opt == 'H') {
-            savingsAccountService.getAllTransactionSort();
-        }
-        else if (opt == 'L') {
-            System.out.print("Enter transaction id you would like to retrieve: ");
-            int tranId = scanner.nextInt();
-
-            System.out.println(AccountDB.getAccountTransaction(accountNo, tranId));
-        }
-    }
-
-    private static AccountService createAccountService(char accType) {
-        AccountServiceFactory accountServiceFactory = new AccountServiceFactory();
-        AccountType acctType;
-
-        if (accType == 'S')
-            acctType = AccountType.Savings;
-        else if (accType == 'C')
-            acctType = AccountType.Cheque;
-        else
-            throw new AccountNotFoundException("Invalid DataAccount");
-        return accountServiceFactory.getAccountService(acctType);
+        getUser();
+        performTrans();
     }
 }

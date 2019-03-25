@@ -1,15 +1,16 @@
 package com.bbd.modisa.data.datamodel;
 
 import com.bbd.modisa.data.ConnectionConfig;
+import com.bbd.modisa.data.entities.Account;
 import com.bbd.modisa.data.entities.User;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CreateUser implements AppData {
     private Connection connection = null;
     PreparedStatement preparedStatement = null;
+    Statement statement = null;
+    ResultSet resultSet = null;
 
     public void createUser(User user) throws SQLException {
         try {
@@ -32,8 +33,6 @@ public class CreateUser implements AppData {
     }
 
     public int showId() throws SQLException {
-        Statement statement = null;
-        ResultSet resultSet = null;
         int maxUserId = 0;
 
         try {
@@ -60,31 +59,33 @@ public class CreateUser implements AppData {
         return maxUserId;
     }
 
-    public void getId() throws SQLException {
-        User user = new User();
-        ResultSet resultSet = null;
-
+    public int getAccId(int userId) throws SQLException {
+        int user_id = 0;
         try {
             connection = ConnectionConfig.getConnection();
-            preparedStatement = connection.prepareStatement("SELECT MAX(userId) FROM User");
-            preparedStatement.setInt(1, user.getUserId());
+            statement = connection.createStatement();
+            /*resultSet = statement.executeQuery("SELECT DISTINCT(accId) FROM User u, Account a WHERE " +
+                    "User_userId = userId");*/
+
+            String sql = "SELECT DISTINCT(accId) FROM Account a, User u WHERE User_userId = ?";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, userId);
             resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()){
-                user.setUserId(resultSet.getInt("userId"));
+            if (resultSet.next()){
+                user_id = resultSet.getInt("accId");
             }
+            return user_id;
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            if (preparedStatement != null){
-                preparedStatement.close();
-            }
-            if (resultSet != null){
-                resultSet.close();
+            if (statement != null){
+                statement.close();
             }
             if (connection != null){
                 connection.close();
             }
         }
+        return user_id;
     }
 }

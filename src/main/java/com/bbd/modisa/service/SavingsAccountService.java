@@ -2,7 +2,7 @@ package com.bbd.modisa.service;
 
 import com.bbd.modisa.data.AccountDB;
 import com.bbd.modisa.exception.InsufficientFundsException;
-import com.bbd.modisa.model.Account;
+import com.bbd.modisa.model.Accounts;
 import com.bbd.modisa.model.SavingsAccount;
 import com.bbd.modisa.model.Transaction;
 import com.bbd.modisa.model.TransactionType;
@@ -16,26 +16,26 @@ public class SavingsAccountService implements AccountService {
     private static Transaction transactions;
     private static int counter = 0;
 
-    public Account createAccount(int accountNo) {
+    public Accounts createAccount(int accountNo) {
         SavingsAccount savingsAccount = new SavingsAccount(accountNo);
         AccountDB.addAccount(savingsAccount);
         return savingsAccount;
     }
 
-    public double deposit(double depositAmount, Account account) {
+    public double deposit(double depositAmount, Accounts accounts) {
         counter++;
-        transactions = new Transaction(counter, TransactionType.DEPOSIT, depositAmount);
-        AccountDB.updateAccount(account.getId(),transactions);
+        //transactions = new Transaction(counter, TransactionType.DEPOSIT, depositAmount);
+        AccountDB.updateAccount(accounts.getId(),transactions);
         myBal = ((getBalance() + depositAmount) - saveTransFee);
         return myBal;
     }
 
-    public double withdraw(double withdrawalAmount, Account account) {
+    public double withdraw(double withdrawalAmount, Accounts accounts) {
         if (withdrawalAmount > getBalance()) {
             throw new InsufficientFundsException("Insufficient funds");
         } else {
-            transactions = new Transaction(counter++, TransactionType.WITHDRAWAL, withdrawalAmount);
-            AccountDB.updateAccount(account.getId(),transactions);
+            //transactions = new Transaction(counter++, TransactionType.WITHDRAWAL, withdrawalAmount);
+            AccountDB.updateAccount(accounts.getId(),transactions);
             myBal = (getBalance() - withdrawalAmount) - saveTransFee;
 
         }
