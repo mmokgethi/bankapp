@@ -1,5 +1,6 @@
 package com.bbd.modisa.client;
 
+import com.bbd.modisa.data.AccountDB;
 import com.bbd.modisa.data.datamodel.CreateAccount;
 import com.bbd.modisa.data.datamodel.CreateTran;
 import com.bbd.modisa.data.datamodel.CreateUser;
@@ -91,9 +92,19 @@ public class BankApp {
     }
 
     public static void main(String[] args) throws SQLException {
-        createUser();
-        createAccount();
-        getUser();
-        performTrans();
+
+        System.out.print("Enter (N) for New Accounts/(E) to login: ");
+        char userType = scanner.next().charAt(0);
+        scanner.nextLine();
+
+        if (userType == 'N'){
+            createUser();
+            createAccount();
+            getUser();
+            performTrans();
+        }else if (userType == 'E'){
+            getUser();
+            performTrans();
+        }
     }
 }
