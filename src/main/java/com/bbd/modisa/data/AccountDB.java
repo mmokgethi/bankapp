@@ -3,7 +3,7 @@ package com.bbd.modisa.data;
 import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.exception.TransactionNotFoundException;
 import com.bbd.modisa.model.Accounts;
-import com.bbd.modisa.model.Transaction;
+import com.bbd.modisa.model.Transactions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +16,17 @@ public class AccountDB {
         ACCOUNTS_LIST.add(accounts);
     }
 
-    public static Accounts updateAccount(int accountId, Transaction transaction) {
+    public static Accounts updateAccount(int accountId, Transactions transactions) {
         for (Accounts accounts : ACCOUNTS_LIST) {
             if (accounts.getId() == accountId) {
-                accounts.getTransactions().add(transaction);
+                accounts.getTransactions().add(transactions);
                 return accounts;
             }
         }
         throw new AccountNotFoundException("Account not found in the database");
     }
 
-    public static List<Transaction> getAllTransactions(int accountNo) {
+    public static List<Transactions> getAllTransactions(int accountNo) {
         for (Accounts accounts : ACCOUNTS_LIST) {
             if (accounts.getId() == accountNo) {
                 System.out.println(accounts + "\n");
@@ -36,7 +36,7 @@ public class AccountDB {
         throw new AccountNotFoundException("Account detail not found");
     }
 
-    public static Transaction getAccountTransaction(int accountId, int transactionId) {
+    public static Transactions getAccountTransaction(int accountId, int transactionId) {
         Accounts currentAccounts = null;
         for (Accounts accounts1 : ACCOUNTS_LIST) {
             if (accounts1.getId() == accountId) {
@@ -45,13 +45,13 @@ public class AccountDB {
             }
         }
         if (currentAccounts != null) {
-            for (Transaction transaction : currentAccounts.getTransactions()) {
-                if (transaction.getTransactionId() == transactionId) {
-                    return transaction;
+            for (Transactions transactions : currentAccounts.getTransactions()) {
+                if (transactions.getTransactionId() == transactionId) {
+                    return transactions;
                 }
             }
 
         }
-        throw new TransactionNotFoundException("Transactions with Id " +  transactionId + " is not found");
+        throw new TransactionNotFoundException("Transaction with Id " +  transactionId + " is not found");
     }
 }

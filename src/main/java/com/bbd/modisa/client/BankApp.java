@@ -1,11 +1,11 @@
 package com.bbd.modisa.client;
 
-import com.bbd.modisa.data.AccountDB;
 import com.bbd.modisa.data.datamodel.CreateAccount;
 import com.bbd.modisa.data.datamodel.CreateTran;
 import com.bbd.modisa.data.datamodel.CreateUser;
 import com.bbd.modisa.data.datamodel.GetUser;
 import com.bbd.modisa.data.entities.Account;
+import com.bbd.modisa.data.entities.Transaction;
 import com.bbd.modisa.data.entities.User;
 import com.bbd.modisa.model.*;
 
@@ -14,23 +14,25 @@ import java.util.Scanner;
 
 public class BankApp {
     private static Scanner scanner = new Scanner(System.in);
-    private static Double amount;
     public static CreateAccount account = new CreateAccount();
     public static CreateTran tran = new CreateTran();
     public static CreateUser makeUser = new CreateUser();
     public static int userId;
 
-    public static void createUser() throws SQLException {
+    public static void createUser() {
         System.out.print("Enter your First Name: ");
         String fName = scanner.nextLine();
 
         System.out.print("Enter you Last Name: ");
         String lName = scanner.nextLine();
 
+
         User user = new User(fName, lName);
         makeUser.createUser(user);
+        System.out.println(makeUser.showId());
         userId = makeUser.showId();
-        System.out.println("Accounts created successfully, you user id is: " + userId);
+        System.out.println(userId);
+        System.out.println("User created successfully, you user id is: " + userId);
     }
 
     public static void createAccount() throws SQLException {
@@ -70,30 +72,33 @@ public class BankApp {
     }
 
     public static void performTrans() throws SQLException {
-        Transaction transaction = null;
+        Transaction transactions = null;
         CreateAccount createAccount = new CreateAccount();
 
-        System.out.print("Which transaction would you like to create: ");
+        System.out.print("Which transactions would you like to create: ");
         char tranType = scanner.next().charAt(0);
 
         if (tranType == 'D'){
             System.out.print("Enter the amount you would like to deposit: ");
             Double amount = scanner.nextDouble();
-            transaction = new Transaction(amount, TransactionType.DEPOSIT.name(), makeUser.getAccId(userId), userId);
-            createAccount.deposit(amount, makeUser.getAccId(userId));
+            transactions = new Transaction(amount, TransactionType.DEPOSIT.name(), makeUser.getAccId(3), 3);
+            createAccount.deposit(amount, makeUser.getAccId(1));
+            System.out.println("did it");
 
         }else if (tranType == 'W'){
             System.out.print("Enter the amount you would like to withdraw: ");
             Double amount = scanner.nextDouble();
-            transaction = new Transaction(amount, TransactionType.WITHDRAWAL.name(), makeUser.getAccId(userId), userId);
+            transactions = new Transaction(amount, TransactionType.WITHDRAWAL.name(), makeUser.getAccId(userId), userId);
             createAccount.withdrawal(amount, makeUser.getAccId(userId));
         }
-        BankApp.tran.createTran(transaction);
+        BankApp.tran.createTran(transactions);
     }
 
     public static void main(String[] args) throws SQLException {
 
-        System.out.print("Enter (N) for New Accounts/(E) to login: ");
+        performTrans();
+        //createUser();
+        /*System.out.print("Enter (N) for New Accounts/(E) to login: ");
         char userType = scanner.next().charAt(0);
         scanner.nextLine();
 
@@ -104,7 +109,15 @@ public class BankApp {
             performTrans();
         }else if (userType == 'E'){
             getUser();
-            performTrans();
-        }
+            System.out.print("Check Balance(B)/Get Statement(S)/Perform Transactions");
+            char opt = scanner.next().charAt(0);
+            if (opt == 'B'){
+
+            }else if (opt == 'S'){
+
+            }else if (opt == 'T'){
+                performTrans();
+            }
+        }*/
     }
 }

@@ -3,14 +3,13 @@ package com.bbd.modisa.service;
 import com.bbd.modisa.exception.InsufficientFundsException;
 import com.bbd.modisa.model.Accounts;
 import com.bbd.modisa.model.CheckAccount;
-import com.bbd.modisa.model.Transaction;
-import com.bbd.modisa.model.TransactionType;
+import com.bbd.modisa.model.Transactions;
 
 public class ChequeAccountService implements AccountService {
 
     private static Double checkTransFee = 3.5;
     private double myBal;
-    private static Transaction trans;
+    private static Transactions trans;
 
     public Accounts createAccount(int accountNo) {
         return new CheckAccount(accountNo);
@@ -18,7 +17,7 @@ public class ChequeAccountService implements AccountService {
 
 
     public double deposit(double depositAmount, Accounts accountsNo) {
-        //trans = new Transaction(1, TransactionType.DEPOSIT,depositAmount);
+        //trans = new Transactions(1, TransactionType.DEPOSIT,depositAmount);
         accountsNo.getTransactions().add(trans);
         myBal = ((getBalance() + depositAmount) - checkTransFee);
         return myBal;
@@ -29,7 +28,7 @@ public class ChequeAccountService implements AccountService {
             throw new InsufficientFundsException("Insufficient funds");
         }
         else {
-            //trans = new Transaction(1, TransactionType.WITHDRAWAL, withdrawalAmount);
+            //trans = new Transactions(1, TransactionType.WITHDRAWAL, withdrawalAmount);
             accountsNo.getTransactions().add(trans);
             myBal = (getBalance() - withdrawalAmount) - checkTransFee;
         }

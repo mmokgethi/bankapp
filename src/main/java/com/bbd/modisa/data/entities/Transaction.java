@@ -1,22 +1,45 @@
 package com.bbd.modisa.data.entities;
 
-public class Transactions {
+import com.bbd.modisa.model.Transactions;
+
+import javax.persistence.*;
+
+@Entity
+public class Transaction extends Transactions {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "tranId")
     private int tranId;
+
     private Double amount;
     private String tranType;
     private int accId;
     private int userId;
 
-    public Transactions(){
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "accId")
+    private Account account;
+
+
+    public Transaction(){
 
     }
 
-    public Transactions(Double amount, String tranType,
-                        int accId, int userId) {
+    public Transaction(Double amount, String tranType,
+                       int accId, int userId) {
         this.amount = amount;
         this.tranType = tranType;
         this.accId = accId;
         this.userId = userId;
+    }
+
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
     public int getTranId() {
@@ -61,7 +84,7 @@ public class Transactions {
 
     @Override
     public String toString() {
-        return "Transactions{" +
+        return "Transaction{" +
                 "tranId=" + tranId +
                 ", amount=" + amount +
                 ", tranTypeCode=" + tranType +

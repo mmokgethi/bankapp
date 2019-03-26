@@ -1,6 +1,14 @@
 package com.bbd.modisa.data.entities;
 
-public class User extends Account {
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+@Table(name = "User")
+public class User extends Account implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userId")
     private int userId;
     private String fName;
     private String lName;

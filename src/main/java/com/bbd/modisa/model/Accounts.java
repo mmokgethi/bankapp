@@ -8,7 +8,7 @@ public class Accounts {
     private Integer id;
     private Double balance;
     private AccountType accountType;
-    private List<Transaction> transactions = new ArrayList<>();
+    private List<Transactions> transactions = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -39,7 +39,7 @@ public class Accounts {
         this.id = id;
     }
 
-    public List<Transaction> getTransactions() {
+    public List<Transactions> getTransactions() {
         return transactions == null ? new ArrayList<>() : transactions;
     }
 }

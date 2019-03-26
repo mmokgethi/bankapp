@@ -3,7 +3,7 @@ package com.bbd.modisa.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Transaction implements Comparable<Transaction> {
+public class Transactions implements Comparable<Transactions> {
 
     private Integer transactionId;
 
@@ -29,8 +29,8 @@ public class Transaction implements Comparable<Transaction> {
         this.userId = userId;
     }
 
-    public Transaction(){}
-    public Transaction(Double amount, String transactionType, int accId, int userId) {
+    public Transactions(){}
+    public Transactions(Double amount, String transactionType, int accId, int userId) {
         this.transactionId = transactionId;
         this.transactionType = transactionType;
         this.amount = amount;
@@ -50,7 +50,7 @@ public class Transaction implements Comparable<Transaction> {
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "Transactions{" +
                 "transactionId=" + transactionId +
                 ", transactionType='" + transactionType + '\'' +
                 ", accId=" + accId +
@@ -84,8 +84,8 @@ public class Transaction implements Comparable<Transaction> {
     }
 
     @Override
-    public int compareTo(Transaction transaction) {
-        int compareId = ((Transaction)transaction).getTransactionId();
+    public int compareTo(Transactions transactions) {
+        int compareId = ((Transactions) transactions).getTransactionId();
         return this.transactionId - compareId;
     }
 }

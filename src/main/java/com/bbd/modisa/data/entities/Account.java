@@ -1,7 +1,14 @@
 package com.bbd.modisa.data.entities;
 
+import javax.persistence.*;
+
+@Entity
 public class Account {
-    private static int accId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "accId")
+    private int accId;
+
     private static Double availBalance;
     private int userId;
     public static String accType;
@@ -28,8 +35,8 @@ public class Account {
         Account.accType = accType;
     }
 
-    public static void setAccId(int accId) {
-        Account.accId = accId;
+    public void setAccId(int accId) {
+        this.accId = accId;
     }
 
     public Double getAvailBalance() {
@@ -56,4 +63,9 @@ public class Account {
                 ", userId=" + userId +
                 '}';
     }
+
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "userId")
+    private User user;
+
 }
