@@ -81,7 +81,7 @@ public class BankApp {
         if (tranType == 'D'){
             System.out.print("Enter the amount you would like to deposit: ");
             Double amount = scanner.nextDouble();
-            transactions = new Transaction(amount, TransactionType.DEPOSIT.name(), makeUser.getAccId(3), 3);
+            transactions = new Transaction(amount, TransactionType.DEPOSIT.name(), makeUser.getAccId(userId), userId);
             createAccount.deposit(amount, makeUser.getAccId(1));
             System.out.println("did it");
 
@@ -96,9 +96,7 @@ public class BankApp {
 
     public static void main(String[] args) throws SQLException {
 
-        performTrans();
-        //createUser();
-        /*System.out.print("Enter (N) for New Accounts/(E) to login: ");
+        System.out.print("Enter (N) for New Accounts/(E) to login: ");
         char userType = scanner.next().charAt(0);
         scanner.nextLine();
 
@@ -109,7 +107,7 @@ public class BankApp {
             performTrans();
         }else if (userType == 'E'){
             getUser();
-            System.out.print("Check Balance(B)/Get Statement(S)/Perform Transactions");
+            System.out.print("Check Balance(B)/Get Statement(S)/Perform Transactions(T): ");
             char opt = scanner.next().charAt(0);
             if (opt == 'B'){
 
@@ -118,6 +116,6 @@ public class BankApp {
             }else if (opt == 'T'){
                 performTrans();
             }
-        }*/
+        }
     }
 }

@@ -41,13 +41,21 @@ public class CreateAccount {
         query.setParameter(1, balance);
         query.setParameter(2, accountId);
         query.executeUpdate();
+        entityManager.close();
     }
 
-    public void withdrawal(double balance, int accountId) throws SQLException {
-            preparedStatement = connection.prepareStatement("UPDATE Account SET availBalance = availBalance" +
-                    "- ? WHERE accId = ?");
-            preparedStatement.setDouble(1, balance);
-            preparedStatement.setInt(2, accountId);
-            preparedStatement.executeUpdate();
+    public void withdrawal(double balance, int accountId){
+
+        entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        Query query = entityManager.createNativeQuery("UPDATE Account SET availBalance = availBalance" +
+                " - ? WHERE accId = ?");
+
+        query.setParameter(1, balance);
+        query.setParameter(2, accountId);
+        query.executeUpdate();
+        entityManager.close();
     }
 }
