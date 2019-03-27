@@ -2,16 +2,31 @@ package com.bbd.modisa.data.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = "User")
-public class User extends Account implements Serializable {
+public class User  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
     private int userId;
     private String fName;
     private String lName;
+
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    public Set<Account> accounts = new TreeSet<>();
+
+    public Set<Account> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(Set<Account> accounts) {
+        this.accounts = accounts;
+    }
 
     public User(){
 

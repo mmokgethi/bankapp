@@ -1,6 +1,8 @@
 package com.bbd.modisa.data.entities;
 
 import javax.persistence.*;
+import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 public class Account {
@@ -9,6 +11,20 @@ public class Account {
     @Column(name = "accId")
     private int accId;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn(name = "userId")
+
+    @OneToMany(mappedBy = "Transaction", cascade = CascadeType.ALL)
+    public Set<Transaction> transactions = new TreeSet<>();
+
+    public Set<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(Set<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     private static Double availBalance;
     private int userId;
     public static String accType;
@@ -16,6 +32,8 @@ public class Account {
     public Account(){
 
     }
+
+
 
     public Account(Double availBalance, int userId, String accType){
         this.availBalance = availBalance;
@@ -63,9 +81,4 @@ public class Account {
                 ", userId=" + userId +
                 '}';
     }
-
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name = "userId")
-    private User user;
-
 }

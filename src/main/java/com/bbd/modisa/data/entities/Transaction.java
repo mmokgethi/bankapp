@@ -17,7 +17,7 @@ public class Transaction extends Transactions implements Serializable {
     private int accId;
     private int userId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "accId")
     private Account account;
 

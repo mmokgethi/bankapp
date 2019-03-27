@@ -62,11 +62,11 @@ public class BankApp {
             GetUser  getUser = new GetUser();
 
             User user = getUser.getId(userId);
-            Account account = getUser.getId(userId);
 
-            System.out.println(account.getAccId() + ", " + user.getUserId() + ", "
+
+           /* System.out.println(account.getAccId() + ", " + user.getUserId() + ", "
                     + user.getfName() + ", "  + user.getlName() + ", " + account.getAccType() +
-                    ", " + account.getAvailBalance());
+                    ", " + account.getAvailBalance());*/
         }
         System.out.println(userId);
     }
