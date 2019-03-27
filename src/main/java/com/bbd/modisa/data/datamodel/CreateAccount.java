@@ -5,14 +5,11 @@ import com.bbd.modisa.data.entities.Account;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 @Transactional
 public class CreateAccount {
-    private Connection connection = ConnectionConfig.getConnection();
-    private PreparedStatement preparedStatement = null;
+
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
     EntityManager entityManager = null;

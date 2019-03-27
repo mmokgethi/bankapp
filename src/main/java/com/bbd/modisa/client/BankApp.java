@@ -91,12 +91,13 @@ public class BankApp {
             transactions = new Transaction(amount, TransactionType.WITHDRAWAL.name(), makeUser.getAccId(userId), userId);
             createAccount.withdrawal(amount, makeUser.getAccId(userId));
         }
-        BankApp.tran.createTran(transactions);
+        //BankApp.tran.createTran(transactions);
     }
 
     public static void main(String[] args) throws SQLException {
 
-        System.out.print("Enter (N) for New Accounts/(E) to login: ");
+        createUser();
+        /* System.out.print("Enter (N) for New Accounts/(E) to login: ");
         char userType = scanner.next().charAt(0);
         scanner.nextLine();
 
@@ -116,6 +117,6 @@ public class BankApp {
             }else if (opt == 'T'){
                 performTrans();
             }
-        }
+        }*/
     }
 }

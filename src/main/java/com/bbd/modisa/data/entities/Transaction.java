@@ -1,12 +1,10 @@
 package com.bbd.modisa.data.entities;
 
-import com.bbd.modisa.model.Transactions;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class Transaction extends Transactions implements Serializable {
+public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tranId")

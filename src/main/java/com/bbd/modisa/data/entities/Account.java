@@ -1,11 +1,12 @@
 package com.bbd.modisa.data.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 
 @Entity
-public class Account {
+public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "accId")
@@ -13,8 +14,9 @@ public class Account {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn(name = "userId")
+    private User user;
 
-    @OneToMany(mappedBy = "Transaction", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
     public Set<Transaction> transactions = new TreeSet<>();
 
     public Set<Transaction> getTransactions() {
