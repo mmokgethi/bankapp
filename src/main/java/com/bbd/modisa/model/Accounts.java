@@ -4,11 +4,11 @@ package com.bbd.modisa.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Account {
+public class Accounts {
     private Integer id;
     private Double balance;
     private AccountType accountType;
-    private List<Transaction> transactions = new ArrayList<>();
+    private List<Transactions> transactions = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -28,7 +28,7 @@ public class Account {
         return accountType;
     }
 
-    public Account(int nextId, AccountType acctType) {
+    public Accounts(int nextId, AccountType acctType) {
         id = nextId;
         balance = 0D;
         this.accountType = acctType;
@@ -39,7 +39,7 @@ public class Account {
         this.id = id;
     }
 
-    public List<Transaction> getTransactions() {
+    public List<Transactions> getTransactions() {
         return transactions == null ? new ArrayList<>() : transactions;
     }
 }

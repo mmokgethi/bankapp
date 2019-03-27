@@ -2,52 +2,52 @@ package com.bbd.modisa.data;
 
 import com.bbd.modisa.exception.AccountNotFoundException;
 import com.bbd.modisa.exception.TransactionNotFoundException;
-import com.bbd.modisa.model.Account;
-import com.bbd.modisa.model.Transaction;
+import com.bbd.modisa.model.Accounts;
+import com.bbd.modisa.model.Transactions;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class AccountDB {
 
-    private static final List<Account> ACCOUNT_LIST = new ArrayList<>();
+    private static final List<Accounts> ACCOUNTS_LIST = new ArrayList<>();
 
-    public static void addAccount(Account account) {
-        ACCOUNT_LIST.add(account);
+    public static void addAccount(Accounts accounts) {
+        ACCOUNTS_LIST.add(accounts);
     }
 
-    public static Account updateAccount(int accountId, Transaction transaction) {
-        for (Account account : ACCOUNT_LIST) {
-            if (account.getId() == accountId) {
-                account.getTransactions().add(transaction);
-                return account;
+    public static Accounts updateAccount(int accountId, Transactions transactions) {
+        for (Accounts accounts : ACCOUNTS_LIST) {
+            if (accounts.getId() == accountId) {
+                accounts.getTransactions().add(transactions);
+                return accounts;
             }
         }
         throw new AccountNotFoundException("Account not found in the database");
     }
 
-    public static List<Transaction> getAllTransactions(int accountNo) {
-        for (Account account : ACCOUNT_LIST) {
-            if (account.getId() == accountNo) {
-                System.out.println(account + "\n");
-                return account.getTransactions();
+    public static List<Transactions> getAllTransactions(int accountNo) {
+        for (Accounts accounts : ACCOUNTS_LIST) {
+            if (accounts.getId() == accountNo) {
+                System.out.println(accounts + "\n");
+                return accounts.getTransactions();
             }
         }
         throw new AccountNotFoundException("Account detail not found");
     }
 
-    public static Transaction getAccountTransaction(int accountId, int transactionId) {
-        Account currentAccount = null;
-        for (Account account1 : ACCOUNT_LIST) {
-            if (account1.getId() == accountId) {
-                currentAccount = account1;
+    public static Transactions getAccountTransaction(int accountId, int transactionId) {
+        Accounts currentAccounts = null;
+        for (Accounts accounts1 : ACCOUNTS_LIST) {
+            if (accounts1.getId() == accountId) {
+                currentAccounts = accounts1;
                 break;
             }
         }
-        if (currentAccount != null) {
-            for (Transaction transaction : currentAccount.getTransactions()) {
-                if (transaction.getTransactionId() == transactionId) {
-                    return transaction;
+        if (currentAccounts != null) {
+            for (Transactions transactions : currentAccounts.getTransactions()) {
+                if (transactions.getTransactionId() == transactionId) {
+                    return transactions;
                 }
             }
 

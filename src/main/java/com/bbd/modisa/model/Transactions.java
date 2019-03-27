@@ -3,18 +3,39 @@ package com.bbd.modisa.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Transaction implements Comparable<Transaction> {
+public class Transactions implements Comparable<Transactions> {
 
     private Integer transactionId;
 
-    private TransactionType transactionType;
-
+    private String transactionType;
+    private int accId;
+    private int userId;
     private Double amount;
 
-    public Transaction(Integer transactionId, TransactionType transactionType, Double amount) {
+
+    public int getAccId() {
+        return accId;
+    }
+
+    public void setAccId(int accId) {
+        this.accId = accId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Transactions(){}
+    public Transactions(Double amount, String transactionType, int accId, int userId) {
         this.transactionId = transactionId;
         this.transactionType = transactionType;
         this.amount = amount;
+        this.userId = userId;
+        this.accId = accId;
     }
 
     public Double getAmount() {
@@ -29,9 +50,11 @@ public class Transaction implements Comparable<Transaction> {
 
     @Override
     public String toString() {
-        return "Transaction{" +
+        return "Transactions{" +
                 "transactionId=" + transactionId +
-                ", transactionType=" + transactionType +
+                ", transactionType='" + transactionType + '\'' +
+                ", accId=" + accId +
+                ", userId=" + userId +
                 ", amount=" + amount +
                 '}';
     }
@@ -44,11 +67,11 @@ public class Transaction implements Comparable<Transaction> {
         this.transactionId = transactionId;
     }
 
-    public TransactionType getTransactionType() {
+    public String getTransactionType() {
         return transactionType;
     }
 
-    public void setTransactionType(TransactionType transactionType) {
+    public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }
 
@@ -61,8 +84,8 @@ public class Transaction implements Comparable<Transaction> {
     }
 
     @Override
-    public int compareTo(Transaction transaction) {
-        int compareId = ((Transaction)transaction).getTransactionId();
+    public int compareTo(Transactions transactions) {
+        int compareId = ((Transactions) transactions).getTransactionId();
         return this.transactionId - compareId;
     }
 }
