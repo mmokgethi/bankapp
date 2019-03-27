@@ -1,6 +1,7 @@
 package com.bbd.modisa.data.datamodel;
 
 
+import com.bbd.modisa.data.entities.Transaction;
 import com.bbd.modisa.model.Transactions;
 
 import javax.persistence.*;
@@ -12,7 +13,7 @@ public class CreateTran  {
     private EntityManager entityManager = null;
 
     @Transactional
-    public void   createTran(Transactions transactions){
+    public void   createTran(Transaction transactions){
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction();
 
@@ -23,9 +24,9 @@ public class CreateTran  {
                 "Account_User_userId) VALUES(?, ? , ?, ?)");
 
         query.setParameter(1, transactions.getAmount());
-        query.setParameter(2, transactions.getTransactionType());
-        query.setParameter(3, transactions.getAccId());
-        query.setParameter(4, transactions.getUserId());
+        query.setParameter(2, transactions.getTranType());
+        query.setParameter(3, transactions.getAccount_accId());
+        query.setParameter(4, transactions.getAccount_User_userId());
 
         entityManager.persist(transactions);
 
@@ -33,4 +34,6 @@ public class CreateTran  {
         entityTransaction.commit();
         entityManager.close();
     }
+
+
 }

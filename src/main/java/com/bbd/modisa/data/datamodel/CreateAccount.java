@@ -1,32 +1,36 @@
 package com.bbd.modisa.data.datamodel;
-
-import com.bbd.modisa.data.ConnectionConfig;
 import com.bbd.modisa.data.entities.Account;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
-import java.sql.SQLException;
 
 @Transactional
 public class CreateAccount {
 
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
-    EntityManager entityManager = null;
+    private EntityManager entityManager = null;
 
     public void createAcc(Account account){
+        entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction();
 
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction =entityManager.getTransaction();
+        entityTransaction.begin();
+
         Query query =  entityManager.createNativeQuery("INSERT INTO Account(availBalance, User_userId, accType)" +
                     " VALUES(?, ?, ?)");
         query.setParameter(1, account.getAvailBalance());
-        query.setParameter(2, account.getUserId());
+        query.setParameter(2, account.getUser_userId());
         query.setParameter(3, account.getAccType());
+
+        entityManager.persist(account);
         query.executeUpdate();
+        entityTransaction.commit();
         entityManager.close();
     }
 
-    public void deposit(double balance, int accountId) throws SQLException {
+    public void deposit(double balance, int accountId) {
 
         entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction entityTransaction = entityManager.getTransaction();

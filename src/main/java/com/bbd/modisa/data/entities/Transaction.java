@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "Transaction")
 public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,11 +13,11 @@ public class Transaction implements Serializable {
 
     private Double amount;
     private String tranType;
-    private int accId;
-    private int userId;
+    private int Account_accId;
+    private int Account_User_userId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn(name = "accId")
+    @PrimaryKeyJoinColumn(name = "Account_accId")
     private Account account;
 
 
@@ -25,11 +26,11 @@ public class Transaction implements Serializable {
     }
 
     public Transaction(Double amount, String tranType,
-                       int accId, int userId) {
+                       int Account_accId, int Account_User_userId) {
         this.amount = amount;
         this.tranType = tranType;
-        this.accId = accId;
-        this.userId = userId;
+        this.Account_accId = Account_accId;
+        this.Account_User_userId = Account_User_userId;
     }
 
 
@@ -65,20 +66,20 @@ public class Transaction implements Serializable {
         this.tranType = tranTypeCode;
     }
 
-    public int getAccId() {
-        return accId;
+    public int getAccount_accId() {
+        return Account_accId;
     }
 
-    public void setAccId(int accId) {
-        this.accId = accId;
+    public void setAccount_accId(int account_accId) {
+        Account_accId = account_accId;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getAccount_User_userId() {
+        return Account_User_userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setAccount_User_userId(int account_User_userId) {
+        Account_User_userId = account_User_userId;
     }
 
     @Override
@@ -87,8 +88,8 @@ public class Transaction implements Serializable {
                 "tranId=" + tranId +
                 ", amount=" + amount +
                 ", tranTypeCode=" + tranType +
-                ", accId=" + accId +
-                ", userId=" + userId +
+                ", accId=" + Account_accId +
+                ", userId=" + Account_User_userId +
                 '}';
     }
 }

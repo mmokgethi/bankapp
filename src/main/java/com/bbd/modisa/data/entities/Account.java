@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 @Entity
+@Table(name = "Account")
 public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,7 +14,7 @@ public class Account implements Serializable {
     private int accId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn(name = "userId")
+    @PrimaryKeyJoinColumn(name = "User_userId")
     private User user;
 
     @OneToMany(mappedBy = "account", cascade = CascadeType.ALL)
@@ -28,7 +29,7 @@ public class Account implements Serializable {
     }
 
     private static Double availBalance;
-    private int userId;
+    private int User_userId;
     public static String accType;
 
     public Account(){
@@ -39,13 +40,11 @@ public class Account implements Serializable {
 
     public Account(Double availBalance, int userId, String accType){
         this.availBalance = availBalance;
-        this.userId = userId;
+        this.User_userId = userId;
         this.accType = accType;
     }
 
-    public int getAccId() {
-        return accId;
-    }
+
 
     public String getAccType() {
         return accType;
@@ -53,6 +52,10 @@ public class Account implements Serializable {
 
     public static void setAccType(String accType) {
         Account.accType = accType;
+    }
+
+    public int getAccId() {
+        return accId;
     }
 
     public void setAccId(int accId) {
@@ -67,12 +70,12 @@ public class Account implements Serializable {
         Account.availBalance = availBalance;
     }
 
-    public int getUserId() {
-        return userId;
+    public int getUser_userId() {
+        return User_userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser_userId(int User_userId) {
+        this.User_userId = User_userId;
     }
 
     @Override
@@ -80,7 +83,7 @@ public class Account implements Serializable {
         return "Account{" +
                 "accId=" + accId +
                 ", availBalance=" + availBalance +
-                ", userId=" + userId +
+                ", userId=" + User_userId +
                 '}';
     }
 }

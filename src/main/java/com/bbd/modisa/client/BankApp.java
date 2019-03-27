@@ -31,48 +31,39 @@ public class BankApp {
         makeUser.createUser(user);
         System.out.println(makeUser.showId());
         userId = makeUser.showId();
-        System.out.println(userId);
         System.out.println("User created successfully, you user id is: " + userId);
     }
 
-    public static void createAccount() throws SQLException {
-        if (userId == 0){
+    public static void createAccount() {
+        if (userId == 0) {
             System.out.print("Enter your user id to create account of your choice: ");
             userId = scanner.nextInt();
-        }else {
-            Account account = null;
-
-            System.out.print("Enter the type of account you would like to create: ");
-            char accountType = scanner.next().charAt(0);
-
-            if (accountType == 'C'){
-                account = new Account(0D, userId, AccountType.Cheque.name());
-            }else if (accountType == 'S'){
-                account = new Account(0D, userId, AccountType.Savings.name());
-            }
-            BankApp.account.createAcc(account);
         }
+        Account account = null;
+
+        System.out.println(userId);
+        System.out.print("Enter the type of account you would like to create: ");
+        char accountType = scanner.next().charAt(0);
+
+        if (accountType == 'C'){
+            account = new Account(0D, userId, AccountType.Cheque.name());
+        }else if (accountType == 'S'){
+            account = new Account(0D, userId, AccountType.Savings.name());
+        }
+        BankApp.account.createAcc(account);
     }
 
-    public static void getUser() throws SQLException {
+    public static void getUser() {
         if (userId == 0){
             System.out.print("Enter your user id: ");
             userId = scanner.nextInt();
         }else{
             GetUser  getUser = new GetUser();
-
-            User user = getUser.getId(userId);
-
-
-           /* System.out.println(account.getAccId() + ", " + user.getUserId() + ", "
-                    + user.getfName() + ", "  + user.getlName() + ", " + account.getAccType() +
-                    ", " + account.getAvailBalance());*/
         }
-        System.out.println(userId);
     }
 
-    public static void performTrans() throws SQLException {
-        Transaction transactions = null;
+    public static void performTrans() {
+        Transaction transaction = null;
         CreateAccount createAccount = new CreateAccount();
 
         System.out.print("Which transactions would you like to create: ");
@@ -81,23 +72,32 @@ public class BankApp {
         if (tranType == 'D'){
             System.out.print("Enter the amount you would like to deposit: ");
             Double amount = scanner.nextDouble();
-            transactions = new Transaction(amount, TransactionType.DEPOSIT.name(), makeUser.getAccId(userId), userId);
-            createAccount.deposit(amount, makeUser.getAccId(1));
-            System.out.println("did it");
-
+            transaction = new Transaction(amount, TransactionType.DEPOSIT.name(), makeUser.getAccId(userId), userId);
+            createAccount.deposit(amount, makeUser.getAccId(userId));
         }else if (tranType == 'W'){
             System.out.print("Enter the amount you would like to withdraw: ");
             Double amount = scanner.nextDouble();
-            transactions = new Transaction(amount, TransactionType.WITHDRAWAL.name(), makeUser.getAccId(userId), userId);
+            transaction = new Transaction(amount, TransactionType.WITHDRAWAL.name(), makeUser.getAccId(userId), userId);
             createAccount.withdrawal(amount, makeUser.getAccId(userId));
         }
-        //BankApp.tran.createTran(transactions);
+        tran.createTran(transaction);
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void getTrans(){
+        GetUser getUser = new GetUser();
 
-        createUser();
-        /* System.out.print("Enter (N) for New Accounts/(E) to login: ");
+        getUser.listAll();
+    }
+
+    public static void getTranById(){
+        GetUser getUser = new GetUser();
+
+        System.out.println(getUser.findById(81));
+    }
+
+    public static void main(String[] args){
+
+        System.out.print("Enter (N) for New Accounts/(E) to login: ");
         char userType = scanner.next().charAt(0);
         scanner.nextLine();
 
@@ -113,10 +113,10 @@ public class BankApp {
             if (opt == 'B'){
 
             }else if (opt == 'S'){
-
+                getTranById();
             }else if (opt == 'T'){
                 performTrans();
             }
-        }*/
+        }
     }
 }
