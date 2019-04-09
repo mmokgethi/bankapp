@@ -1,11 +1,13 @@
 package com.bbd.modisa.data.entities;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 
 @Entity
+@XmlRootElement(name="user")
 @Table(name = "User")
 public class User  implements Serializable {
     @Id

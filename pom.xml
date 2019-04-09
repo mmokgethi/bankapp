@@ -7,6 +7,7 @@
     <groupId>com.bbd.modisa</groupId>
     <artifactId>bankapp</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
     <build>
         <plugins>
             <plugin>
@@ -43,6 +44,37 @@
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <version>1.19</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-servlet</artifactId>
+            <version>1.19</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/net.wasdev.wlp.maven/liberty-maven -->
+        <dependency>
+            <groupId>net.wasdev.wlp.maven</groupId>
+            <artifactId>liberty-maven</artifactId>
+            <version>1.0</version>
+            <type>pom</type>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-bundle</artifactId>
+            <version>1.18.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>1.19</version>
         </dependency>
 
     </dependencies>
