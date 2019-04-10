@@ -1,14 +1,10 @@
 package com.bbd.modisa.service;
-
-import com.bbd.modisa.data.entities.Transaction;
 import com.bbd.modisa.data.entities.Transactions;
+import com.bbd.modisa.data.entities.Users;
 import com.bbd.modisa.model.Response;
 
 import javax.ejb.Stateless;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +21,7 @@ public class TranImpl {
     public Response makeDeposit(Transactions tran){
         trans.put((tran.getTranId()), tran);
         response.setStatus(true);
+        trans.get(tran.getAmount() + tran.getAmount());
         response.setMessage(tran.getAmount() + "Deposited Successful");
         return response;
     }
@@ -34,6 +31,7 @@ public class TranImpl {
     public Response makeWithdrawal(Transactions tran){
         trans.put((tran.getTranId()), tran);
         response.setStatus(true);
+        trans.get(tran.getAmount() - tran.getAmount());
         response.setMessage(tran.getAmount() + " withdrawn successfully");
         return response;
     }
@@ -46,5 +44,15 @@ public class TranImpl {
         //
 
         return response;
+    }
+
+    @GET
+    @Path("/{id}/getDefTran")
+    public Transactions getDummyUser(@PathParam("id") int id) {
+        Transactions tran = new Transactions();
+        tran.setTranId(id);
+        tran.setAmount(500.00);
+        tran.setTranType("Deposit");
+        return tran;
     }
 }
