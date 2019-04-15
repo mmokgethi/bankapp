@@ -7,7 +7,6 @@ import com.bbd.modisa.data.service.BankingDataService;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
-import java.util.List;
 
 @Stateless
 public class AccountServiceImpl implements AccountService {
@@ -62,13 +61,13 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public List<Transaction> getTransactions(Integer userId){
+    public Transaction getTransactions(Integer userId){
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction();
 
         entityManager.getTransaction().begin();
 
-        return (List<Transaction>) entityManager.find(Transaction.class, userId);
+        return entityManager.find(Transaction.class, userId);
     }
 
     @Override

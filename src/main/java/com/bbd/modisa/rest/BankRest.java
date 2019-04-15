@@ -63,7 +63,7 @@ public class BankRest {
     @GET
     @Path("/getStatement/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Transaction> getStatement(@PathParam("userId") Integer userId){
+    public Transaction getStatement(@PathParam("userId") Integer userId){
         return accountService.getTransactions(userId);
     }
 }
