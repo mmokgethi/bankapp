@@ -6,15 +6,19 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.TreeSet;
 
+@XmlRootElement
 @Entity
-@XmlRootElement(name="user")
 @Table(name = "User")
 public class User  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
     private int userId;
+
+    @Column(name = "fName")
     private String fName;
+
+    @Column(name = "lName")
     private String lName;
 
 
