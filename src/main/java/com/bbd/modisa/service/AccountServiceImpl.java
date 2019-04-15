@@ -5,9 +5,11 @@ import com.bbd.modisa.data.entities.Transaction;
 import com.bbd.modisa.model.AccountDto;
 import com.bbd.modisa.data.service.BankingDataService;
 
+import javax.ejb.Stateless;
 import javax.persistence.*;
 import java.util.List;
 
+@Stateless
 public class AccountServiceImpl implements AccountService {
     private BankingDataService bankingDataService;
 

@@ -16,6 +16,9 @@ import java.util.List;
 public class BankRest {
     @EJB
     private BankingService bankingService;
+
+
+    @EJB
     private AccountService accountService;
 
     @POST
@@ -33,18 +36,18 @@ public class BankRest {
     }
 
     //deposit
-    @POST
-    @Path("/deposit/{amount}/{accId}")
+    @GET
+    @Path("/deposit")
     @Produces(MediaType.APPLICATION_JSON)
-    public Double depositCash(@PathParam("amount") Double amount, @PathParam("accID") Integer accId){
+    public Double depositCash(@QueryParam("amount") Double amount, @QueryParam("accID") Integer accId){
         return accountService.deposit(amount, accId);
     }
 
     //withdrawal
-    @POST
-    @Path("/withdrawal/{amount}/{accountId}")
+    @GET
+    @Path("/withdrawal")
     @Produces(MediaType.APPLICATION_JSON)
-    public Double withdrawCash(Double amount, Integer accountId){
+        public Double withdrawCash(@QueryParam("amount") Double amount, @QueryParam("accountId") Integer accountId){
         return accountService.withdraw(amount, accountId);
     }
 
