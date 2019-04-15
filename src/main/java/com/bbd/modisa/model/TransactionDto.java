@@ -1,4 +1,4 @@
-package com.bbd.modisa.data.model;
+package com.bbd.modisa.model;
 
 public class TransactionDto {
     private int tranId;

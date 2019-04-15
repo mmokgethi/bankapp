@@ -1,7 +1,7 @@
 package com.bbd.modisa.mapper;
 
 import com.bbd.modisa.data.entities.User;
-import com.bbd.modisa.data.model.UserDto;
+import com.bbd.modisa.model.UserDto;
 
 public class UserMapper extends ModelMapper<UserDto, User> {
     @Override

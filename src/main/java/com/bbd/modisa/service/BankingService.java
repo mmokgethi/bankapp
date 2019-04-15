@@ -1,6 +1,6 @@
 package com.bbd.modisa.service;
 
-import com.bbd.modisa.data.model.UserDto;
+import com.bbd.modisa.model.UserDto;
 
 public interface BankingService {
 

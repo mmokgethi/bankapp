@@ -1,7 +1,7 @@
 package com.bbd.modisa.rest;
 import com.bbd.modisa.data.entities.Transaction;
-import com.bbd.modisa.data.model.AccountDto;
-import com.bbd.modisa.data.model.UserDto;
+import com.bbd.modisa.model.AccountDto;
+import com.bbd.modisa.model.UserDto;
 import com.bbd.modisa.service.AccountService;
 import com.bbd.modisa.service.BankingService;
 

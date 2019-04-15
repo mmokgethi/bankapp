@@ -2,7 +2,7 @@ package com.bbd.modisa.service;
 
 import com.bbd.modisa.data.entities.Account;
 import com.bbd.modisa.data.entities.Transaction;
-import com.bbd.modisa.data.model.AccountDto;
+import com.bbd.modisa.model.AccountDto;
 import com.bbd.modisa.data.service.BankingDataService;
 
 import javax.persistence.*;

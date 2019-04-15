@@ -2,7 +2,7 @@ package com.bbd.modisa.service;
 
 import com.bbd.modisa.data.entities.User;
 import com.bbd.modisa.data.service.BankingDataService;
-import com.bbd.modisa.data.model.UserDto;
+import com.bbd.modisa.model.UserDto;
 import com.bbd.modisa.mapper.UserMapper;
 
 import javax.ejb.Stateless;

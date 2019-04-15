@@ -1,4 +1,4 @@
-package com.bbd.modisa;
+package com.bbd.modisa.client;
 
 import javax.ws.rs.ApplicationPath;
 

@@ -1,4 +1,4 @@
-package com.bbd.modisa.data.model;
+package com.bbd.modisa.model;
 
 public class AccountDto {
     private         Integer accId;
