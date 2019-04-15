@@ -10,7 +10,7 @@ import javax.persistence.*;
 
 @Stateless
 public class AccountServiceImpl implements AccountService {
-    private BankingDataService bankingDataService;
+    private BankingDataService bankingDataService = new BankingDataService();
 
     private EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("JPA");
     private EntityManager entityManager = null;
