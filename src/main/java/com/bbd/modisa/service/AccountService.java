@@ -1,14 +1,17 @@
 package com.bbd.modisa.service;
 
-import com.bbd.modisa.model.Accounts;
+import com.bbd.modisa.model.AccountDto;
+import com.bbd.modisa.model.TransactionDto;
 
 public interface AccountService {
 
-    Accounts createAccount(int accountNo);
+    AccountDto createAccount(AccountDto accountDto);
 
-    double deposit(double depositAmount, Accounts accounts);
+    double deposit(double depositAmount, Integer accounts);
 
-    double withdraw(double withdrawalAmount, Accounts accounts);
+    double withdraw(double withdrawalAmount, Integer accountId);
+
+    TransactionDto getTransactions(Integer userId);
 
     double getBalance();
 
