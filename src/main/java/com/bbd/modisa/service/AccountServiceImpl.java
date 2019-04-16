@@ -65,16 +65,13 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public TransactionDto getTransactions(Integer userId){
-        Transaction transaction = new Transaction();
         TransactionMapper transactionMapper = new TransactionMapper();
 
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction();
         entityManager.getTransaction().begin();
 
-        transactionMapper.dbToDto(transaction);
-
-        return entityManager.find(TransactionDto.class, userId);
+        return transactionMapper.dbToDto(entityManager.find(Transaction.class, userId));
     }
 
     @Override

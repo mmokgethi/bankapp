@@ -1,5 +1,4 @@
 package com.bbd.modisa.rest;
-import com.bbd.modisa.data.entities.Transaction;
 import com.bbd.modisa.model.AccountDto;
 import com.bbd.modisa.model.TransactionDto;
 import com.bbd.modisa.model.UserDto;
