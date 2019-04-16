@@ -2,8 +2,11 @@ package com.bbd.modisa.service;
 
 import com.bbd.modisa.data.entities.Account;
 import com.bbd.modisa.data.entities.Transaction;
+import com.bbd.modisa.mapper.TransactionMapper;
+import com.bbd.modisa.mapper.UserMapper;
 import com.bbd.modisa.model.AccountDto;
 import com.bbd.modisa.data.service.BankingDataService;
+import com.bbd.modisa.model.TransactionDto;
 
 import javax.ejb.Stateless;
 import javax.persistence.*;
@@ -61,13 +64,17 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Transaction getTransactions(Integer userId){
+    public TransactionDto getTransactions(Integer userId){
+        Transaction transaction = new Transaction();
+        TransactionMapper transactionMapper = new TransactionMapper();
+
         entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction();
-
         entityManager.getTransaction().begin();
 
-        return entityManager.find(Transaction.class, userId);
+        transactionMapper.dbToDto(transaction);
+
+        return entityManager.find(TransactionDto.class, userId);
     }
 
     @Override

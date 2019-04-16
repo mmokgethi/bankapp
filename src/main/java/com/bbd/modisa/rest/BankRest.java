@@ -1,6 +1,7 @@
 package com.bbd.modisa.rest;
 import com.bbd.modisa.data.entities.Transaction;
 import com.bbd.modisa.model.AccountDto;
+import com.bbd.modisa.model.TransactionDto;
 import com.bbd.modisa.model.UserDto;
 import com.bbd.modisa.service.AccountService;
 import com.bbd.modisa.service.BankingService;
@@ -9,7 +10,6 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
 
 @Path("/bank")
 @Stateless
@@ -63,7 +63,7 @@ public class BankRest {
     @GET
     @Path("/getStatement/{userId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Transaction getStatement(@PathParam("userId") Integer userId){
+    public TransactionDto getStatement(@PathParam("userId") Integer userId){
         return accountService.getTransactions(userId);
     }
 }

@@ -1,7 +1,7 @@
 package com.bbd.modisa.service;
 
-import com.bbd.modisa.data.entities.Transaction;
 import com.bbd.modisa.model.AccountDto;
+import com.bbd.modisa.model.TransactionDto;
 
 public interface AccountService {
 
@@ -11,7 +11,7 @@ public interface AccountService {
 
     double withdraw(double withdrawalAmount, Integer accountId);
 
-    Transaction getTransactions(Integer userId);
+    TransactionDto getTransactions(Integer userId);
 
     double getBalance();
 
