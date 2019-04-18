@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="BankSoapService" targetNamespace="http://soap.modisa.bbd.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://soap.modisa.bbd.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    <wsdl:types>
+        <xs:schema xmlns:tns="http://soap.modisa.bbd.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://soap.modisa.bbd.com/" version="1.0">
+
+            <xs:element name="createAccount" type="tns:createAccount"/>
+
+            <xs:element name="createAccountResponse" type="tns:createAccountResponse"/>
+
+            <xs:element name="createUser" type="tns:createUser"/>
+
+            <xs:element name="createUserResponse" type="tns:createUserResponse"/>
+
+            <xs:element name="depositCash" type="tns:depositCash"/>
+
+            <xs:element name="depositCashResponse" type="tns:depositCashResponse"/>
+
+            <xs:element name="getStatement" type="tns:getStatement"/>
+
+            <xs:element name="getStatementResponse" type="tns:getStatementResponse"/>
+
+            <xs:element name="withdrawCash" type="tns:withdrawCash"/>
+
+            <xs:element name="withdrawCashResponse" type="tns:withdrawCashResponse"/>
+
+            <xs:complexType name="withdrawCash">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="amount" type="xs:double"/>
+                    <xs:element minOccurs="0" name="accountId" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="withdrawCashResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="createAccount">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:accountDto"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="accountDto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="accId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="accType" type="xs:string"/>
+                    <xs:element minOccurs="0" name="availBalance" type="xs:double"/>
+                    <xs:element minOccurs="0" name="user_userId" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="createAccountResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:accountDto"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="createUser">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:userDto"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="userDto">
+                <xs:sequence>
+                    <xs:element name="userId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="fName" type="xs:string"/>
+                    <xs:element minOccurs="0" name="lName" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="createUserResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:userDto"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="getStatement">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="userId" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="getStatementResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:transactionDto"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="transactionDto">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="account_User_userId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="account_accId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="amount" type="xs:double"/>
+                    <xs:element name="tranId" type="xs:int"/>
+                    <xs:element minOccurs="0" name="tranType" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="depositCash">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="amount" type="xs:double"/>
+                    <xs:element minOccurs="0" name="accID" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+
+            <xs:complexType name="depositCashResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="withdrawCash">
+        <wsdl:part name="parameters" element="tns:withdrawCash">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createAccount">
+        <wsdl:part name="parameters" element="tns:createAccount">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createUser">
+        <wsdl:part name="parameters" element="tns:createUser">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getStatementResponse">
+        <wsdl:part name="parameters" element="tns:getStatementResponse">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getStatement">
+        <wsdl:part name="parameters" element="tns:getStatement">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="depositCash">
+        <wsdl:part name="parameters" element="tns:depositCash">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createAccountResponse">
+        <wsdl:part name="parameters" element="tns:createAccountResponse">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="withdrawCashResponse">
+        <wsdl:part name="parameters" element="tns:withdrawCashResponse">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="createUserResponse">
+        <wsdl:part name="parameters" element="tns:createUserResponse">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="depositCashResponse">
+        <wsdl:part name="parameters" element="tns:depositCashResponse">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="BankSoap">
+        <wsdl:operation name="withdrawCash">
+            <wsdl:input name="withdrawCash" message="tns:withdrawCash">
+            </wsdl:input>
+            <wsdl:output name="withdrawCashResponse" message="tns:withdrawCashResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createAccount">
+            <wsdl:input name="createAccount" message="tns:createAccount">
+            </wsdl:input>
+            <wsdl:output name="createAccountResponse" message="tns:createAccountResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createUser">
+            <wsdl:input name="createUser" message="tns:createUser">
+            </wsdl:input>
+            <wsdl:output name="createUserResponse" message="tns:createUserResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getStatement">
+            <wsdl:input name="getStatement" message="tns:getStatement">
+            </wsdl:input>
+            <wsdl:output name="getStatementResponse" message="tns:getStatementResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="depositCash">
+            <wsdl:input name="depositCash" message="tns:depositCash">
+            </wsdl:input>
+            <wsdl:output name="depositCashResponse" message="tns:depositCashResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BankSoapServiceSoapBinding" type="tns:BankSoap">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="withdrawCash">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="withdrawCash">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="withdrawCashResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createAccount">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="createAccount">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createAccountResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="createUser">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="createUser">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="createUserResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getStatement">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getStatement">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getStatementResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="depositCash">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="depositCash">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="depositCashResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="BankSoapService">
+        <wsdl:port name="BankSoapPort" binding="tns:BankSoapServiceSoapBinding">
+            <soap:address location="http://localhost:9090/BankSoapPort"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

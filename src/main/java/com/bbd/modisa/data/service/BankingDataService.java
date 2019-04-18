@@ -22,7 +22,7 @@ public class BankingDataService implements AppData {
 
         entityManager.persist(user);
         entityTransaction.commit();
-        entityManager.close();
+         entityManager.close();
         return user;
     }
 
