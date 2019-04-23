@@ -3,15 +3,16 @@ package com.bbd.modisa.service;
 import com.bbd.modisa.data.entities.Account;
 import com.bbd.modisa.data.entities.Transaction;
 import com.bbd.modisa.mapper.TransactionMapper;
-import com.bbd.modisa.mapper.UserMapper;
 import com.bbd.modisa.model.AccountDto;
 import com.bbd.modisa.data.service.BankingDataService;
 import com.bbd.modisa.model.TransactionDto;
 
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 import javax.persistence.*;
 
 @Stateless
+@WebService
 public class AccountServiceImpl implements AccountService {
     private BankingDataService bankingDataService = new BankingDataService();
 

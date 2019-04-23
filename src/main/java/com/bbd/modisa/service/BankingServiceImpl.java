@@ -6,8 +6,10 @@ import com.bbd.modisa.model.UserDto;
 import com.bbd.modisa.mapper.UserMapper;
 
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 @Stateless
+@WebService
 public class BankingServiceImpl implements BankingService {
     private BankingDataService bankingDataService = new BankingDataService();
     private UserMapper userMapper;
@@ -16,7 +18,6 @@ public class BankingServiceImpl implements BankingService {
     public UserDto createUser(UserDto userDto) {
         User user = new User();
 
-        //userMapper.dtoToDb(userDto);
         user.setlName(userDto.getlName());
         user.setfName(userDto.getfName());
         bankingDataService.createUser(user);
